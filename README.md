@@ -1,6 +1,8 @@
 PASN WMS
 ## 介绍
-这是一款基于luman+vue+jwt-auth，使用element ui+vue element admin所开发的前后端分离WMS系统。
+* 这是一款基于luman+vue+jwt-auth，使用element ui+vue element admin所开发的前后端分离WMS系统。
+* 前端应用为：WEB_APP
+* 接口应用为:WEB_API
 
 ## 环境要求
 * php7.2+
