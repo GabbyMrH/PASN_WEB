@@ -21,3 +21,5 @@ $router->get('/', function () use ($router) {
     $data = DB::table('ed_booking')->orderByDesc('create_date')->get();
     return response()->json($data);
 });
+//测试jwt
+$router->get('login','AuthController@store');
