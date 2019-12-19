@@ -46,6 +46,8 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+//跨域配置
+// $app->configure('cors'); //似乎注销也可以 0.0
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -58,12 +60,16 @@ $app->singleton(
 */
 
 $app->middleware([
-    App\Http\Middleware\ExampleMiddleware::class
+    App\Http\Middleware\ExampleMiddleware::class,
+    //跨域中间件
+    \Barryvdh\Cors\HandleCors::class,
 ]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,8 +85,10 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-//开启全部artisan功能
+//开启其余artisan功能
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+//注册跨域服务
+$app->register(Barryvdh\Cors\ServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
