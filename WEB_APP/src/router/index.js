@@ -172,19 +172,19 @@ export const asyncRoutes = [
         path: 'inbound',
         component: () => import('@/views/icons/index'),
         name: 'InBound',
-        meta: { title: 'inBound', icon: 'icon', noCache: true }
+        meta: { title: 'inBound', icon: 'inbound', noCache: true }
       },
       {
         path: 'outbound',
         component: () => import('@/views/icons/index'),
         name: 'OutBound',
-        meta: { title: 'outBound', icon: 'icon', noCache: true }
+        meta: { title: 'outBound', icon: 'outbound', noCache: true }
       },
       {
         path: 'inventory',
         component: () => import('@/views/icons/index'),
         name: 'Inventory',
-        meta: { title: 'inventory', icon: 'icon', noCache: true }
+        meta: { title: 'inventory', icon: 'inventory', noCache: true }
       }
     ]
   },

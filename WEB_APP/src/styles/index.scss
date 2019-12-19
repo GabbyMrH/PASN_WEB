@@ -12,6 +12,8 @@ body {
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
+/* 全局图标颜色 */
+path { fill: inherit !important }
 
 label {
   font-weight: 700;
