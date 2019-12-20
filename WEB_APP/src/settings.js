@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Vue Element Admin',
+  title: '首库WMS',
 
   /**
    * @type {boolean} true | false

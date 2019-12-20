@@ -20,6 +20,10 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
+// 注册全局request
+// import request from '@/utils/request'
+// Vue.prototype.$request = request
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
