@@ -9,7 +9,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '1001',
+            'code' => 1001,
             'msg' => is_null($msg) ? '参数有误' : $msg
         ];
     }
@@ -18,7 +18,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '1003',
+            'code' => 1003,
             'msg' => is_null($msg) ? '数据有误' : $msg
         ];
     }
@@ -27,7 +27,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '2001',
+            'code' => 2001,
             'msg' => is_null($msg) ? '操作成功' : $msg
         ];
     }
@@ -36,7 +36,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '4001',
+            'code' => 4001,
             'msg' => is_null($msg) ? '禁止访问' : $msg
         ];
     }
@@ -45,7 +45,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '4002',
+            'code' => 4002,
             'msg' => is_null($msg) ? '权限不足' : $msg
         ];
     }
@@ -54,7 +54,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '4003',
+            'code' => 4003,
             'msg' => is_null($msg) ? '操作失败' : $msg
         ];
     }
@@ -63,7 +63,7 @@ class StatusController extends Controller
     {
         return [
             'data' => $data,
-            'status' => '4004',
+            'code' => 4004,
             'msg' => is_null($msg) ? '结果为空' : $msg
         ];
     }
