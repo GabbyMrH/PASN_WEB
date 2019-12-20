@@ -16,9 +16,13 @@ export function getInfo(token) {
   })
 }
 
-export function logout() {
+export function logout(token) {
   return request({
-    url: '/user/logout',
-    method: 'post'
+    url: '/user/current',
+    method: 'delete',
+    // 删除token需要传递该格式参数
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
   })
 }
