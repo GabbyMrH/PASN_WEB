@@ -7,7 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
+// import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
@@ -188,9 +188,32 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/user',
+    component: Layout,
+    name: 'User',
+    meta: {
+      title: 'user',
+      icon: 'peoples'
+    },
+    children: [
+      {
+        path: 'my-profile',
+        component: () => import('@/views/icons/index'),
+        name: 'MyProfile',
+        meta: { title: 'myProfile', icon: 'edit', noCache: true }
+      },
+      {
+        path: 'user-list',
+        component: () => import('@/views/icons/index'),
+        name: 'UserList',
+        meta: { title: 'userList', icon: 'list', noCache: true }
+      }
+    ]
+  },
 
   /** when your routing map is too long, you can split it into small modules **/
-  componentsRouter,
+  // componentsRouter,
   chartsRouter,
   nestedRouter,
   tableRouter,
