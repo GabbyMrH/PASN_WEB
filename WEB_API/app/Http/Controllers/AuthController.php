@@ -66,9 +66,11 @@ class AuthController extends Controller
         return $this->userToken($token);
     }
     /* 删除token */
-    public function destroy()
+    public function destroy(Request $request)
     {
         Auth::guard('api')->logout();
-        return response(null, 204);
+        //$data = $request->header('Bearer-Token');
+        //return response(null, 204);
+        return response()->json(StatusController::success(null));
     }
 }
