@@ -24,3 +24,6 @@
 ## 二开规范
 * 需要您掌握laravel、lumen、jwt-auth、restAPI、vue、vuex、vue-router、webpack、axios、request.js以数据库相关知识。
 * 请遵循开发规范，以便于后期维护。
+
+## 更新说明
+* 新增dev分支，用于开发测试。
