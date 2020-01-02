@@ -3,6 +3,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
+  // token: `Bearer ${getToken()}`,
   token: getToken(),
   name: '',
   avatar: '',
@@ -12,6 +13,7 @@ const state = {
 
 const mutations = {
   SET_TOKEN: (state, token) => {
+    // state.token = token
     state.token = token
   },
   SET_INTRODUCTION: (state, introduction) => {
@@ -36,8 +38,10 @@ const actions = {
       // 用户账号密码正确后设置token
       login({ username: username.trim(), password: password }).then(response => {
         // const { data } = response
+        // commit('SET_TOKEN', `Bearer ${response.access_token}`)
         commit('SET_TOKEN', response.access_token)
-        setToken(response.access_token)
+        // 设置token
+        setToken('Bearer ' + response.access_token)
         resolve()
       }).catch(error => {
         reject(error)
@@ -103,13 +107,14 @@ const actions = {
     })
   },
 
-  // dynamically modify permissions
+  // dynamically modify permissions--变换角色
   changeRoles({ commit, dispatch }, role) {
     return new Promise(async resolve => {
       const token = role + '-token'
 
       commit('SET_TOKEN', token)
-      setToken(token)
+      // 原代码: setToken(token)
+      setToken(`Bearer ${token}`)
 
       const { roles } = await dispatch('getInfo')
 

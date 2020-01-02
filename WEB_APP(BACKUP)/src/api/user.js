@@ -19,10 +19,10 @@ export function getInfo(token) {
 export function logout(token) {
   return request({
     url: '/user/current',
-    method: 'delete',
+    method: 'delete'
     // 删除token需要传递该格式参数
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
+    // headers: {
+    //   'Authorization': `Bearer ${token}`
+    // }
   })
 }
