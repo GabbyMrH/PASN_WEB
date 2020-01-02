@@ -16,7 +16,7 @@ export function getInfo(token) {
   })
 }
 
-export function logout(token) {
+export function logout() {
   return request({
     url: '/user/current',
     method: 'delete'
