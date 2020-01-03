@@ -35,5 +35,9 @@ $router->group(['prefix' => 'v1'], function ($router) {
     //-接下来，该guard的配置就在该文件内找到了，就是默认的api guard，当前的服务提供者为users模型
     $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->get('user', 'UsersController@info');
+
+        /* 订单管理 */
+        //库存余额
+        $router->get('inventory','InventoryController@list');
     });
 });
