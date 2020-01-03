@@ -89,6 +89,8 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 //注册跨域服务
 $app->register(Barryvdh\Cors\ServiceProvider::class);
+//注册redis服务
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
