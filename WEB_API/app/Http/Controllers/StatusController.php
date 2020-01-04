@@ -67,4 +67,13 @@ class StatusController extends Controller
             'msg' => is_null($msg) ? '结果为空' : $msg
         ];
     }
+    //授权过期
+    public static function expired($data = null, $msg = null)
+    {
+        return [
+            'data' => $data,
+            'code' => 4005,
+            'msg' => is_null($msg) ? '授权过期' : $msg
+        ];
+    }
 }
