@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 
 class EdInventory extends Model
 {
@@ -41,5 +40,11 @@ class EdInventory extends Model
 
             return $this->where($filter_condition)->orderBy('create_date', 'DESC')->paginate($req_data['page_limit']);
         }
+    }
+
+    //dashboard 总量
+    public function total()
+    {
+        return $this->count();
     }
 }
