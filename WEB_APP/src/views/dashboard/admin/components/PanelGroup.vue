@@ -48,7 +48,7 @@
           <div class="card-panel-text">
             库存余额
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="inventoryEndVal" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -56,15 +56,31 @@
 </template>
 
 <script>
+// 数字滚动组件
 import CountTo from 'vue-count-to'
-
+import { inventoryTotal } from '@/api/panel'
 export default {
   components: {
     CountTo
   },
+  data() {
+    return {
+      inventoryEndVal: 2019
+    }
+  },
+  created() {
+    this.getInventoryTotal()
+  },
   methods: {
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type)
+    },
+    // 获取库存余额总量
+    getInventoryTotal() {
+      inventoryTotal().then(response => {
+        // console.log(response.data)
+        this.inventoryEndVal = response.data
+      })
     }
   }
 }
