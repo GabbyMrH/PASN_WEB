@@ -50,7 +50,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => Auth::guard('api')->factory()->getTTL() * 60,
+            // 'expires_in' => Auth::guard('api')->factory()->getTTL() * 10,
+            'expires_in' => Auth::guard('api')->factory()->getTTL(), //过期时间以env文件内设置
             'code'=>2001
         ]);
     }
