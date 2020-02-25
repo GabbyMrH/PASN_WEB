@@ -249,18 +249,7 @@ import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 import UploadExcelComponent from '@/components/UploadExcel/custom.vue'
 
-// const calendarTypeOptions = [
-//   { key: 'CN', display_name: 'China' },
-//   { key: 'US', display_name: 'USA' },
-//   { key: 'JP', display_name: 'Japan' },
-//   { key: 'EU', display_name: 'Eurozone' }
-// ]
-
-// arr to obj, such as { CN : "China", US : "USA" }
-// const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-//   acc[cur.key] = cur.display_name
-//   return acc
-// }, {})
+// 测试测试测试
 
 export default {
   name: 'ComplexTable',
