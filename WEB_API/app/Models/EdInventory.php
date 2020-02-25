@@ -34,12 +34,9 @@ class EdInventory extends Model
     //数据处理
     public function dataList($req_data)
     {
-        if ($req_data) {
-            //过滤page和page_limit筛选条件
-            $filter_condition = Arr::except($req_data, ['page', 'page_limit']);
-
-            return $this->where($filter_condition)->orderBy('create_date', 'DESC')->paginate($req_data['page_limit']);
-        }
+        //过滤page和page_limit筛选条件
+        $filter_condition = Arr::except($req_data, ['page', 'page_limit']);
+        return $this->where($filter_condition)->orderBy('create_date', 'DESC')->paginate($req_data['page_limit']);
     }
 
     //dashboard 总量
