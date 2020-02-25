@@ -91,6 +91,8 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Barryvdh\Cors\ServiceProvider::class);
 //注册redis服务
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
+//注册excel插件
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
