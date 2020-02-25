@@ -10,6 +10,7 @@
         "flipbox/lumen-generator": "^6.0",
         "illuminate/redis": "^6.8",
         "laravel/lumen-framework": "^6.0",
+        "maatwebsite/excel": "^3.1",
         "predis/predis": "^1.1",
         "tymon/jwt-auth": "1.0.*"
     },
