@@ -43,7 +43,7 @@
         </template>
       </el-table-column> -->
       <el-table-column type="index" align="center" />
-      <el-table-column :label="$t('table.date')" align="center">
+      <el-table-column :label="$t('table.create_date')" align="center">
         <template slot-scope="{row}">
           <span>{{ row.create_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -136,7 +136,7 @@
 
 <script>
 // import { inventory, fetchPv, createArticle, updateArticle } from '@/api/order'
-import { inventory } from '@/api/order'
+import { inventory } from '@/api/inventory'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
