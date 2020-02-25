@@ -51,6 +51,9 @@ class TestController extends Controller
      */
     public function testDingTalkMessage(Request $request)
     {
+        if(!$request->message){
+            return response()->json(StatusController::paramError($request->message,'消息不能为空'));
+        }
         $access_token = '830ffcc7cfebf521b55d1eccc2d23241cd0cd01bd0e763a82a3f0188d87f1c74';
         $sign_data = $this->signComputed('SEC0e070cded6e19c4133bcfc7437918d0e6a617305ecd8971fb3371b2637e2a5c7');
         $webhook = "https://oapi.dingtalk.com/robot/send?access_token=".$access_token."&timestamp=".$sign_data['timestamp']."&sign=".$sign_data['sign'];
@@ -59,7 +62,7 @@ class TestController extends Controller
         $data_string = json_encode($data);
 
         $result = $this->request_by_curl($webhook, $data_string);
-        return response()->json(StatusController::fails($messageData,$result));
+        return response()->json(StatusController::success($messageData,$result));
     }
 
 }
