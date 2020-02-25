@@ -118,8 +118,9 @@
           <el-col class="table-button">
             <el-button v-waves plain icon="el-icon-plus" size="mini" @click="handleDialogCreate()">增加</el-button>
             <!-- <el-button v-waves plain type="primary" icon="el-icon-edit" size="small">编辑</el-button> -->
-            <el-button v-waves plain type="danger" icon="el-icon-delete" size="mini">删除</el-button>
-            <el-button v-waves plain type="success" icon="el-icon-upload" size="mini">导入</el-button>
+            <el-button v-waves plain type="danger" icon="el-icon-delete" size="mini" @click="handleDialogDelete()">删除</el-button>
+            <!-- <el-button v-waves plain type="success" icon="el-icon-upload" size="mini" @click="handleDialogUpload">导入</el-button>-->
+            <upload-excel-component class="dialogUpload" :on-success="handleSuccess" :before-upload="beforeUpload" />
           </el-col>
           <el-col>
             <el-table
@@ -130,6 +131,7 @@
               fit
               highlight-current-row
               style="width: 100%;"
+              @selection-change="handleDialogSelectionChange"
             >
               <el-table-column
                 type="selection"
@@ -245,6 +247,7 @@ import { tableList, dialogList, fetchPv, createArticle, updateArticle } from '@/
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import UploadExcelComponent from '@/components/UploadExcel/custom.vue'
 
 // const calendarTypeOptions = [
 //   { key: 'CN', display_name: 'China' },
@@ -261,7 +264,7 @@ import Pagination from '@/components/Pagination' // secondary package based on e
 
 export default {
   name: 'ComplexTable',
-  components: { Pagination },
+  components: { Pagination, UploadExcelComponent },
   directives: { waves },
   filters: {
     statusFilter(status) {
@@ -286,6 +289,7 @@ export default {
         booking_date: null
       },
       dialogList: [],
+      dialogMultipleSelection: [],
       dialogListQuery: {
         page: 1,
         page_limit: 5,
@@ -331,11 +335,6 @@ export default {
         start_time: null,
         end_time: null
       },
-      // importanceOptions: [1, 2, 3],
-      // calendarTypeOptions,
-      // sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
-      // statusOptions: ['published', 'draft', 'deleted'],
-      // showReviewer: false,
       temp: {
         customer_id: null,
         warehouse_code: null,
@@ -433,6 +432,11 @@ export default {
         booing_date: new Date(),
         order_qty: null
       }
+    },
+    // 获取弹出对话框内选择内容
+    handleDialogSelectionChange(val) {
+      // 获取选中的值交给数据托管
+      this.dialogMultipleSelection = val
     },
     // 点击创建订单
     handleCreate() {
@@ -542,6 +546,12 @@ export default {
       const index = this.list.indexOf(row)
       this.list.splice(index, 1)
     },
+    handleDialogDelete() {
+      // 从dialogList里移除所选数据即this.dialogMultipleSelection
+      console.log(this.dialogMultipleSelection.indexOf(0))
+      this.dialogList.splice(0, this.dialogMultipleSelection.length)
+      console.log(this.dialogList)
+    },
     handleFetchPv(pv) {
       fetchPv(pv).then(response => {
         this.pvData = response.data.pvData
@@ -597,4 +607,7 @@ export default {
   .table-button{
   margin:15px 0 15px 15px;
 }
+  .dialogUpload{
+    display: inline-block;
+  }
 </style>
