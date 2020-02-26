@@ -27,6 +27,8 @@ $router->group(['prefix' => 'v1'], function ($router) {
 
     // 测试dinTalk
     $router->post('dingTest[/{message}]','TestController@testDingTalkMessage');
+    // 密码加密
+    $router->get('secret','TestController@psdComputed');
 
 
     //获取用户信息 路由组调用auth中间件,中间件会触发illuminate/auth/AuthManage.php下的guard,-
@@ -34,6 +36,7 @@ $router->group(['prefix' => 'v1'], function ($router) {
     //-接下来，该guard的配置就在该文件内找到了，就是默认的api guard，当前的服务提供者为users模型
 
     $router->group(['middleware' => 'auth:api'], function ($router) {
+        $router->get('test','InventoryController@test');
         $router->get('user', 'UsersController@info');
 
         /* 面板管理 */
@@ -44,7 +47,7 @@ $router->group(['prefix' => 'v1'], function ($router) {
         //预约入库-列表
         $router->get('inbound','InBoundController@list');
         $router->post('detailImport','InBoundController@detailImport');
-        $router->get('test','InBoundController@test');
+        // $router->get('test','InBoundController@test');
         //预约入库-增加
         $router->post('inbound/add','InBoundController@queryAdd');
         //预约入库-增加-列表数据
