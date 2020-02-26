@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class EdBooking extends Model
 {
@@ -13,6 +14,9 @@ class EdBooking extends Model
     protected $table = 'ed_booking';
     protected $primaryKey = 'booking_id';
     public $incrementing = false;
+    // 定义数据库自动写入时间字段
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'update_date';
 
     protected $fillable = [];
 
@@ -21,7 +25,7 @@ class EdBooking extends Model
      */
     public function details()
     {
-        return $this->hasMany('App\Models\EdBookingDetail', 'booking_id');
+        return $this->hasMany('App\Models\EdBookingDetail', 'booking_id','booking_id');
     }
 
     public function queryList($data)
@@ -75,5 +79,18 @@ class EdBooking extends Model
             ->select($result_condition)
             ->orderBy('ed_booking.create_date', 'DESC')
             ->paginate($req_data['page_limit']);
+    }
+
+    public function queryAdd($requestData)
+    {
+        try {
+            DB::beginTransaction(); // 开启事务
+            //先写入主库booking库再写入从库detail库
+            $this->customer_id = $requestData['customer_id'];
+            $this->warehouse_code = $requestData['warehouse_code'];
+
+        }catch (\Exception $exception){
+
+        }
     }
 }
