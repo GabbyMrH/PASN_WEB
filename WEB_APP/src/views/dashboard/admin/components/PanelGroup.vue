@@ -79,7 +79,7 @@ export default {
     getInventoryTotal() {
       inventoryTotal().then(response => {
         // console.log(response.data)
-        this.inventoryEndVal = response.data
+        this.inventoryEndVal = response.data.total
       })
     }
   }
