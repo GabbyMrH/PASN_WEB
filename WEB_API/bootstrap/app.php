@@ -93,6 +93,8 @@ $app->register(Barryvdh\Cors\ServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 //注册excel插件
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+//注册enum枚举包
+$app->register(\BenSampo\Enum\EnumServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
