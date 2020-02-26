@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.customer_id" clearable :placeholder="$t('table.customer_id')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-input v-model="listQuery.ref_no" clearable :placeholder="$t('table.ref_no')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.booking_no" clearable :placeholder="$t('table.booking_no')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-date-picker
         v-model="pickerDate"
         class="filter-item"
@@ -43,14 +43,14 @@
             width="55"
             align="center"
           />
-          <el-table-column :label="$t('table.customer_id')" align="center">
-            <template slot-scope="{row}">
-              <span>{{ row.customer_id }}</span>
-            </template>
-          </el-table-column>
           <el-table-column :label="$t('table.ref_no')" align="center">
             <template slot-scope="{row}">
               <span>{{ row.ref_no }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('table.booking_no')" align="center">
+            <template slot-scope="{row}">
+              <span>{{ row.booking_no }}</span>
             </template>
           </el-table-column>
           <el-table-column :label="$t('table.create_date')" align="center" prop="create_data" sortable>
@@ -96,8 +96,8 @@
       <el-form ref="dialogForm" :rules="rules" :inline="true" :model="temp" label-position="right" label-width="100px">
         <el-row>
           <el-divider content-position="left">订单信息</el-divider>
-          <el-form-item :label="$t('table.customer_id')" prop="customer_id">
-            <el-input v-model="temp.customer_id" />
+          <el-form-item :label="$t('table.ref_no')" prop="ref_no">
+            <el-input v-model="temp.ref_no" />
           </el-form-item>
           <el-form-item :label="$t('table.booking_date')" prop="booking_date">
             <el-date-picker
@@ -116,11 +116,10 @@
         <el-row>
           <el-divider content-position="left">货物信息</el-divider>
           <el-col class="table-button">
-            <el-button v-waves plain icon="el-icon-plus" size="mini" @click="handleDialogCreate()">增加</el-button>
-            <!-- <el-button v-waves plain type="primary" icon="el-icon-edit" size="small">编辑</el-button> -->
+            <el-button v-if=" dialogStatus==='create' " v-waves plain icon="el-icon-plus" size="mini" @click="handleDialogCreate()">增加</el-button>
+            <el-button v-if=" dialogStatus==='update' " v-waves plain type="success" icon="el-icon-edit" size="mini" @click="handleDialogUpdate()">编辑</el-button>
             <el-button v-waves plain type="danger" icon="el-icon-delete" size="mini" @click="handleDialogDelete()">删除</el-button>
-            <!-- <el-button v-waves plain type="success" icon="el-icon-upload" size="mini" @click="handleDialogUpload">导入</el-button>-->
-            <upload-excel-component class="dialogUpload" :on-success="handleSuccess" :before-upload="beforeUpload" />
+            <upload-excel-component v-if=" dialogStatus==='create' " class="dialogUpload" :on-success="handleSuccess" :before-upload="beforeUpload" />
           </el-col>
           <el-col>
             <el-table
@@ -249,8 +248,6 @@ import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 import UploadExcelComponent from '@/components/UploadExcel/custom.vue'
 
-// 测试测试测试
-
 export default {
   name: 'ComplexTable',
   components: { Pagination, UploadExcelComponent },
@@ -348,7 +345,7 @@ export default {
       dialogPvVisible: false,
       pvData: [],
       rules: {
-        customer_id: [{ required: true, message: '客户参考号必填', trigger: 'blur' }],
+        ref_no: [{ required: true, message: '客户参考号必填', trigger: 'blur' }],
         // booking_date: [{ type: 'date', required: true, message: '日期必选', trigger: 'blur' }],
         warehouse_code: [{ required: true, message: '仓库代码必填', trigger: 'blur' }]
       },
@@ -416,7 +413,7 @@ export default {
     // 重置缓存
     resetTemp() {
       this.temp = {
-        customer_id: null,
+        ref_no: null,
         warehouse_code: null,
         booing_date: new Date(),
         order_qty: null
@@ -426,6 +423,26 @@ export default {
     handleDialogSelectionChange(val) {
       // 获取选中的值交给数据托管
       this.dialogMultipleSelection = val
+    },
+    // excel上传前
+    beforeUpload(file) {
+      const isLt1M = file.size / 1024 / 1024 < 1
+
+      if (isLt1M) {
+        return true
+      }
+
+      this.$message({
+        message: 'Please do not upload files larger than 1m in size.',
+        type: 'warning'
+      })
+      return false
+    },
+    // excel上传成功后
+    handleSuccess({ results, header }) {
+      console.log(results)
+      this.dialogList = results
+      this.tableHeader = header
     },
     // 点击创建订单
     handleCreate() {
@@ -490,7 +507,7 @@ export default {
       this.dialogStatus = 'update'
       this.temp = Object.assign({}, row) // copy obj
       // 赋值给参数
-      this.dialogListQuery.customer_id = this.temp.customer_id
+      this.dialogListQuery.ref_no = this.temp.ref_no
       this.dialogListQuery.warehouse_code = this.temp.warehouse_code
       // 获取弹出框数据
       this.getDialogList()
