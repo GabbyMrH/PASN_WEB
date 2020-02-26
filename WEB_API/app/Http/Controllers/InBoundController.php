@@ -16,10 +16,12 @@ class InBoundController extends Controller
     {
         $this->edBooking = $edBooking;
     }
+
     /**
-     * 列表
+     * @param Request $request
+     * @return 入库订单列表
      */
-    public function list(Request $request)
+    public function queryList(Request $request)
     {
         $req_data = $request->all();
         if(!$req_data){
@@ -34,7 +36,11 @@ class InBoundController extends Controller
         Excel::import(new EdBookingDetailImprot,$request->file('ed_booking_detail'));
     }
 
-    public function queryList(Request $request)
+    /**
+     * @param Request $request
+     * @return 入库货物详情单列表
+     */
+    public function queryDetailList(Request $request)
     {
         //若所传参数其中值为空，则回传null数据
         if(!$request->filled('booking_no') || !$request->filled('warehouse_code')){
@@ -44,6 +50,11 @@ class InBoundController extends Controller
         $results = $this->edBooking->queryList($request->all());
         return response()->json(StatusController::success($results));
     }
+
+    /**
+     * @param Request $request
+     * @return 入库单添加
+     */
     public function queryAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
