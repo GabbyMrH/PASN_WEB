@@ -21,7 +21,7 @@ class EdBooking extends Model
     protected $fillable = [];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return 一对多关联detail表
      */
     public function details()
     {
