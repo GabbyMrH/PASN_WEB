@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class TestController extends Controller
 {
@@ -63,6 +66,20 @@ class TestController extends Controller
 
         $result = $this->request_by_curl($webhook, $data_string);
         return response()->json(StatusController::success($messageData,$result));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function psdComputed(Request $request)
+    {
+        if(!$request->secret){
+            return response()->json(StatusController::paramError($request->secret,'密码参数不能为空'));
+        }
+        // $secret = Crypt::encrypt($request->secret);
+        $secret = Hash::make($request->secret);
+        return response()->json(StatusController::success($secret));
     }
 
 }
