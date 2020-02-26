@@ -4,27 +4,12 @@
       <el-input v-model="listQuery.warehouse_code" clearable :placeholder="$t('table.warehouse_code')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-input v-model="listQuery.sku_no" clearable :placeholder="$t('table.sku_no')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-input v-model="listQuery.po_no" clearable :placeholder="$t('table.po_no')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <!-- <el-select v-model="listQuery.importance" :placeholder="$t('table.importance')" clearable style="width: 90px" class="filter-item">
-        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
-      </el-select>
-      <el-select v-model="listQuery.type" :placeholder="$t('table.type')" clearable class="filter-item" style="width: 130px">
-        <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key" />
-      </el-select>
-      <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
-        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
-      </el-select> -->
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
-      <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        {{ $t('table.add') }}
-      </el-button> -->
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         {{ $t('table.export') }}
       </el-button>
-      <!-- <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
-        {{ $t('table.reviewer') }}
-      </el-checkbox> -->
     </div>
 
     <el-table
@@ -37,11 +22,6 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <!-- <el-table-column :label="$t('table.id')" prop="id" sortable="custom" align="center" width="80" :class-name="getSortClass('id')">
-        <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column> -->
       <el-table-column type="index" align="center" />
       <el-table-column :label="$t('table.create_date')" align="center">
         <template slot-scope="{row}">
@@ -53,9 +33,9 @@
           <span>{{ row.warehouse_code }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.customer_id')" align="center" width="100px">
+      <el-table-column :label="$t('table.ref_no')" align="center" width="150px">
         <template slot-scope="{row}">
-          <span>{{ row.customer_id }}</span>
+          <span>{{ row.ref_no }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.po_no')" align="center">
