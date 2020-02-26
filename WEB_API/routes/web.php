@@ -40,19 +40,21 @@ $router->group(['prefix' => 'v1'], function ($router) {
         $router->get('user', 'UsersController@info');
 
         /* 面板管理 */
-        //库存余额-总量
+        // 库存余额-总量
         $router->get('inventoryTotal','PanelController@inventoryTotal');
 
         /* 订单管理 */
-        //预约入库-列表
-        $router->get('inbound','InBoundController@list');
-        $router->post('detailImport','InBoundController@detailImport');
+
+        // 预约入库-列表
+        $router->get('inbound','InBoundController@queryList');
+        // $router->post('detailImport','InBoundController@detailImport');
         // $router->get('test','InBoundController@test');
-        //预约入库-增加
+        // 预约入库-增加
         $router->post('inbound/add','InBoundController@queryAdd');
-        //预约入库-增加-列表数据
-        $router->get('inbound/detail','InBoundController@queryList');
-        //库存余额
+        // 预约入库-增加-detail数据
+        $router->get('inbound/detail','InBoundController@queryDetailList');
+
+        // 库存余额
         $router->get('inventory','InventoryController@list');
     });
 });
