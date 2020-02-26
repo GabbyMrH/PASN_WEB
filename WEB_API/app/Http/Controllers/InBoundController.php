@@ -37,7 +37,7 @@ class InBoundController extends Controller
     public function queryList(Request $request)
     {
         //若所传参数其中值为空，则回传null数据
-        if(!$request->filled('customer_id') || !$request->filled('warehouse_code')){
+        if(!$request->filled('booking_no') || !$request->filled('warehouse_code')){
             return response()->json(StatusController::success());
         }
         //将传递参数对象交由模型处理
@@ -47,7 +47,7 @@ class InBoundController extends Controller
     public function queryAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'customer_id'=>'required|exists:ed_customer',
+            'booking_no'=>'required|exists:ed_customer',
             'warehouse_code'=>'required'
         ]);
         if($validator->fails()){
