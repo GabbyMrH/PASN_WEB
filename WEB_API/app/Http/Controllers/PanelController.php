@@ -10,6 +10,6 @@ class PanelController extends Controller
     //inventory 总量
     public function inventoryTotal(EdInventory $edInventory)
     {
-        return response()->json(StatusController::success($edInventory->total()));
+        return response()->json(StatusController::success($edInventory->dataList()));
     }
 }
