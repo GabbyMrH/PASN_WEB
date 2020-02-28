@@ -132,6 +132,7 @@ export default {
     export: '导出',
     // reviewer: '审核人',
     actions: '操作',
+    otherActions: '导出操作',
     id: '序号',
     date: '收货日期',
     create_date: '创建日期',
