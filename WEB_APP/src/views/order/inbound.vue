@@ -25,8 +25,8 @@
       <el-col class="table-button">
         <el-button v-waves plain icon="el-icon-plus" size="small" @click="handleCreate()">创建订单</el-button>
         <!-- <el-button v-waves plain type="primary" icon="el-icon-edit" size="small">编辑</el-button> -->
-        <el-button v-waves plain type="danger" icon="el-icon-delete" size="small">批量删除</el-button>
-        <el-button v-waves plain type="success" icon="el-icon-tickets" size="small">收货清单</el-button>
+        <!-- <el-button v-waves plain type="danger" icon="el-icon-delete" size="small">批量删除</el-button> -->
+        <!-- <el-button v-waves plain type="success" icon="el-icon-tickets" size="small">收货报告</el-button> -->
       </el-col>
       <el-col>
         <el-table
@@ -73,6 +73,16 @@
           <el-table-column :label="$t('table.booking_date')" align="center" prop="booking_data" sortable>
             <template slot-scope="{row}">
               <span>{{ row.booking_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('table.otherActions')" align="center">
+            <template>
+              <el-tooltip effect="dark" content="收货报告" placement="top">
+                <el-button icon="el-icon-tickets" size="mini" round />
+              </el-tooltip>
+              <el-tooltip effect="dark" content="QC下载" placement="top">
+                <el-button icon="el-icon-picture-outline" size="mini" round />
+              </el-tooltip>
             </template>
           </el-table-column>
           <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
@@ -366,7 +376,7 @@ export default {
         // Just to simulate the time of the request
         setTimeout(() => {
           this.listLoading = false
-        }, 1.5 * 1000)
+        }, 1 * 1000)
       })
     },
     // 获取弹出框表格数据
@@ -379,7 +389,7 @@ export default {
         // 设置加载时间
         setTimeout(() => {
           this.dialogListLoading = false
-        }, 1.5 * 1000)
+        }, 1 * 1000)
       })
     },
     // 弹出框-传递数据
