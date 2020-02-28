@@ -169,24 +169,6 @@ export default {
         return acc
       }, {})
     }
-    // afterQRScan() {
-    //   if (e.key === 'x-admin-oauth-code') {
-    //     const code = getQueryObject(e.newValue)
-    //     const codeMap = {
-    //       wechat: 'code',
-    //       tencent: 'code'
-    //     }
-    //     const type = codeMap[this.auth_type]
-    //     const codeName = code[type]
-    //     if (codeName) {
-    //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-    //         this.$router.push({ path: this.redirect || '/' })
-    //       })
-    //     } else {
-    //       alert('第三方登录失败')
-    //     }
-    //   }
-    // }
   }
 }
 </script>
@@ -218,13 +200,16 @@ $cursor: #fff;
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
-      color: $light_gray;
+      color: #889aa4;
       height: 47px;
       caret-color: $cursor;
 
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px $bg inset !important;
         -webkit-text-fill-color: $cursor !important;
+      }
+      &::placeholder{
+        color: #889aa4;
       }
     }
   }
@@ -246,16 +231,24 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  /*background-color: $bg;*/
+  background: url("~@/assets/images/login-background.jpeg");
+  background-size: 100% 100%;
   overflow: hidden;
 
   .login-form {
     position: relative;
     width: 520px;
+    height: 350px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 35px 35px;
+    /*padding: 160px 35px 0;*/
+    top: 200px;
     margin: 0 auto;
     overflow: hidden;
+    /*border: 1px solid #0a76a4;*/
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.8)
   }
 
   .tips {
@@ -283,7 +276,7 @@ $light_gray:#eee;
 
     .title {
       font-size: 26px;
-      color: $light_gray;
+      color: $dark_gray;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
