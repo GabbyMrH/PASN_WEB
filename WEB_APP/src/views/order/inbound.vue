@@ -53,26 +53,36 @@
               <span>{{ row.booking_no }}</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('table.create_date')" align="center" prop="create_data" sortable>
+          <el-table-column :label="$t('table.booking_date')" align="center" prop="booking_data" sortable>
             <template slot-scope="{row}">
-              <span>{{ row.create_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+              <span>{{ row.booking_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('table.booking_status')" align="center">
+          <el-table-column :label="$t('table.booking_status')" align="center" prop="booking_status">
             <template slot-scope="{row}">
               <el-tag :type="row.booking_status | statusFilter">
                 {{ row.booking_status }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('table.order_qty')" align="center">
+          <el-table-column :label="$t('table.order_qty')" align="center" prop="order_qty" sortable>
             <template slot-scope="{row}">
               <span>{{ row.order_qty }}</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('table.booking_date')" align="center" prop="booking_data" sortable>
+          <el-table-column label="收货日期" align="center" prop="booking_date" sortable>
             <template slot-scope="{row}">
               <span>{{ row.booking_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('table.customer_id')" align="center" prop="booking_data">
+            <template slot-scope="{row}">
+              <span>{{ row.customer_id }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('table.warehouse_code')" align="center" prop="booking_data">
+            <template slot-scope="{row}">
+              <span>{{ row.warehouse_code }}</span>
             </template>
           </el-table-column>
           <el-table-column :label="$t('table.otherActions')" align="center">
@@ -85,7 +95,7 @@
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
+          <el-table-column :label="$t('table.actions')" align="center" width="160" class-name="small-padding fixed-width">
             <template slot-scope="{row}">
               <el-button type="primary" size="mini" @click="handleUpdate(row)">
                 {{ $t('table.edit') }}
@@ -116,8 +126,18 @@
               placeholder="选择日期时间"
             />
           </el-form-item>
+          <el-form-item :label="$t('table.customer_id')" prop="ed_customer_customer_id">
+            <el-input v-model="loginUser.ed_customer_customer_id" />
+          </el-form-item>
           <el-form-item :label="$t('table.warehouse_code')" prop="warehouse_code">
-            <el-input v-model="temp.warehouse_code" />
+            <el-select v-model="temp.warehouse_code" placeholder="请选择">
+              <el-option
+                v-for="item in warehouseOptions"
+                :key="item.warehouse_code"
+                :label="item.warehouse_code"
+                :value="item.warehouse_code"
+              />
+            </el-select>
           </el-form-item>
           <!-- <el-form-item :label="$t('table.title')" prop="title">
             <el-input v-model="temp.title" />
@@ -130,6 +150,7 @@
             <el-button v-if=" dialogStatus==='update' " v-waves plain type="success" icon="el-icon-edit" size="mini" @click="handleDialogUpdate()">编辑</el-button>
             <el-button v-waves plain type="danger" icon="el-icon-delete" size="mini" @click="handleDialogDelete()">删除</el-button>
             <upload-excel-component v-if=" dialogStatus==='create' " class="dialogUpload" :on-success="handleSuccess" :before-upload="beforeUpload" />
+            <el-link v-if=" dialogStatus==='create' " :href="excelTemplateUrl" type="warning" style="margin-left: 10px;" target="_blank">Excel模板下载</el-link>
           </el-col>
           <el-col>
             <el-table
@@ -165,6 +186,11 @@
               <el-table-column :label="$t('table.order_qty')" prop="order_qty" align="center">
                 <template slot-scope="{row}">
                   <span>{{ row.order_qty }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column :label="$t('table.country')" prop="country" align="center">
+                <template slot-scope="{row}">
+                  <span>{{ row.country }}</span>
                 </template>
               </el-table-column>
               <el-table-column :label="$t('table.case_length')" prop="case_length" align="center">
@@ -204,8 +230,8 @@
     </el-dialog>
 
     <!-- 弹出框内弹出框 -->
-    <el-dialog :visible.sync="dialogFormDataVisiable" title="增加货物" width="32%">
-      <el-form ref="dialogDataForm" :rules="rules" :inline="true" :model="temp" label-position="right" label-width="50px">
+    <el-dialog :visible.sync="dialogFormDataVisiable" title="增加货物" width="38%">
+      <el-form ref="dialogDataForm" :rules="rules" :inline="true" :model="temp" label-position="right" label-width="100px">
         <el-row>
           <el-col>
             <el-form-item :label="$t('table.ref_no')" prop="ref_no">
@@ -214,7 +240,11 @@
             <el-form-item :label="$t('table.po_no')" prop="po_no">
               <el-input v-model="temp.po_no" />
             </el-form-item>
+            <el-form-item :label="$t('table.country')" prop="country">
+              <el-input v-model="temp.country" />
+            </el-form-item>
           </el-col>
+          <el-divider class="detail-add-divider" />
           <el-col>
             <el-form-item :label="$t('table.order_qty')" prop="order_qty">
               <el-input v-model="temp.order_qty" />
@@ -255,11 +285,14 @@
 import { tableList, dialogList, fetchPv, createArticle, updateArticle } from '@/api/inbound'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
+import { getToken } from '@/utils/auth'
+import { getInfo } from '@/api/user'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 import UploadExcelComponent from '@/components/UploadExcel/custom.vue'
+import { warehouseList } from '@/api/common'
 
 export default {
-  name: 'ComplexTable',
+  name: 'Inbound',
   components: { Pagination, UploadExcelComponent },
   directives: { waves },
   filters: {
@@ -276,6 +309,8 @@ export default {
   },
   data() {
     return {
+      loginUser: '',
+      excelTemplateUrl: '',
       tableKey: 0,
       list: null,
       diaLogKey: 0,
@@ -348,6 +383,8 @@ export default {
       // 弹出框内弹出框
       dialogFormDataVisiable: false,
       dialogStatus: '',
+      warehouseOptions: [],
+      warehouseValue: '',
       textMap: {
         update: '编辑',
         create: '创建'
@@ -357,15 +394,38 @@ export default {
       rules: {
         ref_no: [{ required: true, message: '客户参考号必填', trigger: 'blur' }],
         // booking_date: [{ type: 'date', required: true, message: '日期必选', trigger: 'blur' }],
-        warehouse_code: [{ required: true, message: '仓库代码必填', trigger: 'blur' }]
+        // warehouse_code: [{ required: true, message: '仓库代码必填', trigger: 'blur' }],
+        customer_id: [{ required: true, message: '客户编码必填', trigger: 'blur' }]
       },
       downloadLoading: false
     }
   },
   created() {
     this.getList()
+    this.getLoginUser()
+    this.getExcelTemplate()
+    this.getWarehouseList()
   },
   methods: {
+    // 获取当前登录用户
+    getLoginUser() {
+      getInfo(getToken()).then(response => {
+        this.loginUser = response.data
+      })
+    },
+    // 获取仓库信息
+    getWarehouseList() {
+      warehouseList().then(response => {
+        this.warehouseOptions = response.data
+      })
+    },
+    // 获取excel模板服务端路径，需剔除api版本号
+    getExcelTemplate() {
+      const baseUrl = process.env.VUE_APP_BASE_API
+      const serverUrl = baseUrl.replace('/v1', '')
+      // 组合服务器端url，当前暂时写死
+      this.excelTemplateUrl = serverUrl + '/assets/excel/detail-list-template.xlsx'
+    },
     // 获取入库数据
     getList() {
       this.listLoading = true
@@ -373,10 +433,12 @@ export default {
         this.list = response.data.data
         this.total = response.data.total
 
+        // 关闭加载按钮
+        this.listLoading = false
         // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1 * 1000)
+        // setTimeout(() => {
+        //   this.listLoading = false
+        // }, 1 * 1000)
       })
     },
     // 获取弹出框表格数据
@@ -386,10 +448,12 @@ export default {
         this.dialogList = response.data.data
         this.dialogTotal = response.data.total
 
+        // 关闭加载按钮
+        this.dialogListLoading = false
         // 设置加载时间
-        setTimeout(() => {
-          this.dialogListLoading = false
-        }, 1 * 1000)
+        // setTimeout(() => {
+        //   this.dialogListLoading = false
+        // }, 1 * 1000)
       })
     },
     // 弹出框-传递数据
@@ -436,6 +500,8 @@ export default {
     },
     // excel上传前
     beforeUpload(file) {
+      this.handleDialogCreate()
+
       const isLt1M = file.size / 1024 / 1024 < 1
 
       if (isLt1M) {
@@ -443,7 +509,7 @@ export default {
       }
 
       this.$message({
-        message: 'Please do not upload files larger than 1m in size.',
+        message: '请勿上传超过1MB大小的文件.',
         type: 'warning'
       })
       return false
@@ -454,6 +520,8 @@ export default {
       this.dialogList = results
       this.tableHeader = header
     },
+    // excel模板
+    handleDialogExcelTplDownload() {},
     // 点击创建订单
     handleCreate() {
       this.resetTemp()
@@ -480,6 +548,7 @@ export default {
         order_qty: this.temp.order_qty,
         ref_no: this.temp.ref_no,
         po_no: this.temp.po_no,
+        country: this.temp.country,
         case_length: this.temp.case_length,
         case_width: this.temp.case_width,
         case_height: this.temp.case_height,
@@ -604,15 +673,15 @@ export default {
           return v[j]
         }
       }))
-    },
-    getSortClass: function(key) {
-      const sort = this.listQuery.sort
-      return sort === `+${key}`
-        ? 'ascending'
-        : sort === `-${key}`
-          ? 'descending'
-          : ''
     }
+    // getSortClass: function(key) {
+    //   const sort = this.listQuery.sort
+    //   return sort === `+${key}`
+    //     ? 'ascending'
+    //     : sort === `-${key}`
+    //       ? 'descending'
+    //       : ''
+    // }
   }
 }
 </script>
@@ -624,6 +693,9 @@ export default {
   margin:15px 0 15px 15px;
 }
   .dialogUpload{
+    display: inline-block;
+  }
+  .detail-add-divider{
     display: inline-block;
   }
 </style>
