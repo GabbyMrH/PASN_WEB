@@ -28,7 +28,7 @@ class InBoundController extends Controller
             return response()->json(StatusController::paramError($req_data));
         }
         //过滤参数
-        $results = $this->edBooking->dataList(array_filter($req_data));
+        $results = $this->edBooking->queryList(array_filter($req_data));
         return response()->json(StatusController::success($results));
     }
     public function detailImport(Request $request)
@@ -47,7 +47,7 @@ class InBoundController extends Controller
             return response()->json(StatusController::success());
         }
         //将传递参数对象交由模型处理
-        $results = $this->edBooking->queryList($request->all());
+        $results = $this->edBooking->queryDetailList($request->all());
         return response()->json(StatusController::success($results));
     }
 
