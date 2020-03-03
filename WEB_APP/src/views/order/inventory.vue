@@ -206,10 +206,12 @@ export default {
         console.log(response.data.data)
         this.total = response.data.total
 
+        // 关闭加载按钮
+        this.listLoading = false
         // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1 * 1000)
+        // setTimeout(() => {
+        //   this.listLoading = false
+        // }, 1 * 1000)
       })
     },
     handleFilter() {
