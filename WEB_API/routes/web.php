@@ -43,6 +43,9 @@ $router->group(['prefix' => 'v1'], function ($router) {
         // 库存余额-总量
         $router->get('inventoryTotal','PanelController@inventoryTotal');
 
+        // 获取仓库
+        $router->get('warehouse','CommonController@warehouseList');
+
         /* 订单管理 */
 
         // 预约入库-列表
