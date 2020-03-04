@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class InventoryController extends Controller
 {
     /**
-     * @param Request $request
-     * @param EdInventory $edInventory
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request  请求参数
+     * @param EdInventory $edInventory 库存余额表模型
+     * @return 库存余额列表
      */
    public function list(Request $request,EdInventory $edInventory)
    {
@@ -21,7 +21,7 @@ class InventoryController extends Controller
            return response()->json(StatusController::paramError($req_data));
        }
        //过滤传递参数
-       $results = $edInventory->dataList(array_filter($req_data));
+       $results = $edInventory->queryList(array_filter($req_data));
        return response()->json(StatusController::success($results));
 
    }
