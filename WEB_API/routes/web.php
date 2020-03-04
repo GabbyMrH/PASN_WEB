@@ -54,6 +54,8 @@ $router->group(['prefix' => 'v1'], function ($router) {
         // $router->get('test','InBoundController@test');
         // 预约入库-增加
         $router->post('inbound/add','InBoundController@queryAdd');
+        // 预约入库-编辑
+        $router->post('inbound/edit','InBoundController@queryEdit');
         // 预约入库-增加-detail数据
         $router->get('inbound/detail','InBoundController@queryDetailList');
 
