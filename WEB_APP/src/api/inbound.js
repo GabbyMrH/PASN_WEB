@@ -17,3 +17,12 @@ export function dialogList(query) {
     params: query
   })
 }
+
+// 预约入库
+export function queryInboundAdd(query) {
+  return request({
+    url: 'inbound/add',
+    method: 'post',
+    params: query
+  })
+}
