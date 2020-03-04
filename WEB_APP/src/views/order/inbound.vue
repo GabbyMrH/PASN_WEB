@@ -124,6 +124,7 @@
               v-model="temp.booking_date"
               type="datetime"
               placeholder="选择日期时间"
+              value-format="yyyy-MM-dd HH:mm:ss"
             />
           </el-form-item>
           <el-form-item :label="$t('table.customer_id')" prop="ed_customer_customer_id">
@@ -183,9 +184,9 @@
                   <span>{{ row.po_no }}</span>
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('table.order_qty')" prop="order_qty" align="center">
+              <el-table-column :label="$t('table.qty_case')" prop="qty_case" align="center">
                 <template slot-scope="{row}">
-                  <span>{{ row.order_qty }}</span>
+                  <span>{{ row.qty_case }}</span>
                 </template>
               </el-table-column>
               <el-table-column :label="$t('table.country')" prop="country" align="center">
@@ -223,7 +224,7 @@
         <el-button @click="dialogFormVisible = false">
           {{ $t('table.cancel') }}
         </el-button>
-        <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
+        <el-button type="primary" :loading="buttonLoading" @click="dialogStatus==='create'?createData():updateData()">
           {{ $t('table.confirm') }}
         </el-button>
       </div>
@@ -246,8 +247,8 @@
           </el-col>
           <el-divider class="detail-add-divider" />
           <el-col>
-            <el-form-item :label="$t('table.order_qty')" prop="order_qty">
-              <el-input v-model="temp.order_qty" />
+            <el-form-item :label="$t('table.qty_case')" prop="qty_case">
+              <el-input v-model="temp.qty_case" />
             </el-form-item>
             <el-form-item :label="$t('table.case_length')" prop="case_length">
               <el-input v-model="temp.case_length" />
@@ -282,7 +283,7 @@
 </template>
 
 <script>
-import { tableList, dialogList, fetchPv, createArticle, updateArticle } from '@/api/inbound'
+import { tableList, dialogList, fetchPv, createArticle, updateArticle, queryInboundAdd } from '@/api/inbound'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import { getToken } from '@/utils/auth'
@@ -314,17 +315,12 @@ export default {
       tableKey: 0,
       list: null,
       diaLogKey: 0,
-      dialogQuery: {
-        customer_id: null,
-        warehouse_code: null,
-        booking_date: null
-      },
       dialogList: [],
       dialogMultipleSelection: [],
       dialogListQuery: {
         page: 1,
         page_limit: 5,
-        customer_id: null,
+        customer_id: this.loginUser,
         warehouse_code: null
       },
       dialogListTemp: null,
@@ -333,6 +329,7 @@ export default {
       pickerDate: null,
       listLoading: true,
       dialogListLoading: true,
+      buttonLoading: false,
       pickerOptions: {
         shortcuts: [{
           text: '最近一周',
@@ -371,6 +368,7 @@ export default {
         warehouse_code: null,
         booking_date: new Date(),
         order_qty: null,
+        qty_case: null,
         ref_no: null,
         po_no: null,
         case_length: null,
@@ -411,6 +409,8 @@ export default {
     getLoginUser() {
       getInfo(getToken()).then(response => {
         this.loginUser = response.data
+        // 把登录用户赋值给customer_id
+        this.dialogListQuery.customer_id = this.loginUser.ed_customer_customer_id
       })
     },
     // 获取仓库信息
@@ -443,6 +443,7 @@ export default {
     },
     // 获取弹出框表格数据
     getDialogList() {
+      console.log(this.dialogListQuery)
       this.dialogListLoading = true
       dialogList(this.dialogListQuery).then(response => {
         this.dialogList = response.data.data
@@ -498,10 +499,14 @@ export default {
       // 获取选中的值交给数据托管
       this.dialogMultipleSelection = val
     },
-    // excel上传前
+    // excel上传前操作
     beforeUpload(file) {
-      this.handleDialogCreate()
-
+      // 验证ref_no未填则提示错误
+      this.$refs['dialogForm'].validate((valid) => {
+        if (!valid) {
+          return false
+        }
+      })
       const isLt1M = file.size / 1024 / 1024 < 1
 
       if (isLt1M) {
@@ -545,7 +550,7 @@ export default {
     innerDialogConfirm() {
       // 获取用户输入值放入对象，然后将对象追加到数组中
       const dialogList = {
-        order_qty: this.temp.order_qty,
+        qty_case: this.temp.qty_case,
         ref_no: this.temp.ref_no,
         po_no: this.temp.po_no,
         country: this.temp.country,
@@ -580,6 +585,31 @@ export default {
             })
           })
         }
+      })
+    },
+    // 新增订单 创建
+    createData() {
+      const insertQuery = {
+        ref_no: this.temp.ref_no,
+        booking_date: this.temp.booking_date,
+        warehouse_code: this.temp.warehouse_code,
+        customer_id: this.loginUser.ed_customer_customer_id,
+        booking_detail: this.dialogList
+      }
+      // this.dialogList.forEach((item, index) => {
+      //   console.log(item.ref_no)
+      // })
+      this.buttonLoading = true
+      queryInboundAdd(insertQuery).then(response => {
+        this.buttonLoading = false
+        if (response.code === 2001) {
+          this.$message({
+            message: '操作成功',
+            type: 'success'
+          })
+        }
+        this.dialogFormVisible = false
+        this.getList()
       })
     },
     handleUpdate(row) {
