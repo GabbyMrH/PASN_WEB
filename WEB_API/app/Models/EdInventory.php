@@ -11,62 +11,78 @@ class EdInventory extends Model
 {
     /**
      * 指定表名
+     * @var string
      */
     protected $table = 'ed_inventory';
 
     /**
      * 定义主键名称
+     * @var string
      */
     protected $primaryKey = 'PKID';
 
     /**
      * 指示模型主键是否递增
-     *
      * @var bool
      */
     public $incrementing = false;
 
     /**
      * 主键ID的“类型”。
-     *
      * @var string
      */
     protected $keyType = 'string';
 
-    public static $customer_id;
+    /**
+     * customerID对应用户类型
+     * @var string
+     */
+    public static $customerID;
 
     public function __construct()
     {
-        self::$customer_id = Auth::user()->ed_customer_customer_id;
-        if (!self::$customer_id) {
+        self::$customerID = Auth::user()->ed_customer_customer_id;
+        if (!self::$customerID) {
             false;
         }
     }
 
-    //数据处理
-    public function dataList($requestData)
+    /**
+     * @param $requestData 控制器传递参数
+     * @return 调用对应方法返回数据
+     */
+    public function queryList($requestData)
     {
         //过滤page和page_limit筛选条件
-        $filter_condition = Arr::has($requestData,['page', 'page_limit']) ? Arr::except($requestData, ['page', 'page_limit']) : '';
-
-        //过滤变量不为空表示有其他参数传入则以该数据做筛选条件
-        if($filter_condition){
-            // 返回管理员级别所有数据
-            if (self::$customer_id == CustomerType::admin) {
-                return self::where($filter_condition)->orderBy('create_date', 'DESC')->paginate($requestData['page_limit']);
-            }
-            //默认值则判断传递参数返回对应数据
-            return self::where($filter_condition)
-                ->where('customer_id', self::$customer_id)
-                ->orderBy('create_date', 'DESC')
-                ->paginate($requestData['page_limit']);
+        $filterCondition = Arr::except($requestData,['page', 'page_limit']);
+        if($filterCondition){
+            return $this->queryListWithinParams($requestData,$filterCondition);
         }
-        // 没有过滤条件则不需要以筛选条件传入
-        if (self::$customer_id == CustomerType::admin) {
-            return $this->orderBy('create_date', 'DESC')->paginate($requestData['page_limit']);
+        return $this->queryListWithoutParams($requestData);
+    }
+
+    // 当queryList()有其他(除page、page_limit)参数传入时
+    private function queryListWithinParams($requestData,$filterData)
+    {
+        // 判断登录用户角色
+        if (self::$customerID == CustomerType::admin) {
+            return $this->where($filterData)->orderBy('create_date', 'DESC')->paginate($requestData['page_limit']);
         }
         //默认值则判断传递参数返回对应数据
-        return $this->where('customer_id', self::$customer_id)
+        return $this->where($filterData)
+            ->where('customer_id', self::$customerID)
+            ->orderBy('create_date', 'DESC')
+            ->paginate($requestData['page_limit']);
+    }
+
+    // 当queryList()无其他参数(除page、page_limit)传入时
+    private function queryListWithoutParams($requestData)
+    {
+        // 判断登录用户角色
+        if (self::$customerID == CustomerType::admin) {
+            return $this->orderBy('create_date', 'DESC')->paginate($requestData['page_limit']);
+        }
+        return $this->where('customer_id', self::$customerID)
             ->orderBy('create_date', 'DESC')
             ->paginate($requestData['page_limit']);
     }
