@@ -140,6 +140,7 @@ export default {
     booking_id: 'booking#',
     booking_status: '状态',
     order_qty: '数量/箱数',
+    qty_case: '数量/箱数',
     case_length: '长',
     case_width: '宽',
     case_height: '高',
