@@ -20,6 +20,7 @@
         "davidhsianturi/laravel-compass": "^0.5.1",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
+        "mpociot/laravel-apidoc-generator": "^4.3",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
