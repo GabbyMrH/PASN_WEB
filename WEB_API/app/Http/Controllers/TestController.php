@@ -50,7 +50,16 @@ class TestController extends Controller
     }
 
     /**
-     * @return 回调状态
+     * dingTalk message
+     * 钉钉推送消息接口
+     * @queryParam message required 信息内容
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @response {
+     *   "data": "编写api文档测试-V2",
+     *   "code": 2001,
+     *   "msg": "ok"
+     *   }
      */
     public function testDingTalkMessage(Request $request)
     {
@@ -62,15 +71,25 @@ class TestController extends Controller
         $webhook = "https://oapi.dingtalk.com/robot/send?access_token=".$access_token."&timestamp=".$sign_data['timestamp']."&sign=".$sign_data['sign'];
         $messageData = $request->message;
         $data = array ('msgtype' => 'text','text' => array ('content' => $messageData));
-        $data_string = json_encode($data);
+        $dataString = json_encode($data);
 
-        $result = $this->request_by_curl($webhook, $data_string);
-        return response()->json(StatusController::success($messageData,$result));
+        $result = $this->request_by_curl($webhook, $dataString);
+        // 解码数据取其值
+        $decodeData = json_decode($result,true);
+        return response()->json(StatusController::success($messageData,$decodeData['errmsg']));
     }
 
     /**
+     * password encryption
+     * 密码加密接口
      * @param Request $request
+     * @queryParam secret required 要加密的参数
      * @return \Illuminate\Http\JsonResponse
+     * @response {
+     *   "data": "$2y$10$bjYB5CM75JOBmxPAi4KqxuSplXzkKF.m3gxIMugmWXOz7toB3K5fO",
+     *  "code": 2001,
+     *   "msg": "操作成功"
+     *   }
      */
     public function psdComputed(Request $request)
     {
