@@ -97,10 +97,10 @@
           </el-table-column>
           <el-table-column :label="$t('table.actions')" align="center" width="160" class-name="small-padding fixed-width">
             <template slot-scope="{row}">
-              <el-button type="primary" size="mini" @click="handleUpdate(row)">
+              <el-button v-if="row.booking_status == 'NEW' " type="primary" size="mini" @click="handleUpdate(row)">
                 {{ $t('table.edit') }}
               </el-button>
-              <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
+              <el-button v-if="row.booking_status=='RECEIPTING'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
                 {{ $t('table.delete') }}
               </el-button>
             </template>
@@ -148,7 +148,7 @@
           <el-divider content-position="left">货物信息</el-divider>
           <el-col class="table-button">
             <el-button v-if=" dialogStatus==='create' " v-waves plain icon="el-icon-plus" size="mini" @click="handleDialogCreate()">增加</el-button>
-            <el-button v-if=" dialogStatus==='update' " v-waves plain type="success" icon="el-icon-edit" size="mini" @click="handleDialogUpdate()">编辑</el-button>
+            <el-button v-if=" dialogStatus==='update' " v-waves plain type="success" icon="el-icon-edit" size="mini" @click="dialogHandleUpdate()">编辑</el-button>
             <el-button v-waves plain type="danger" icon="el-icon-delete" size="mini" @click="handleDialogDelete()">删除</el-button>
             <upload-excel-component v-if=" dialogStatus==='create' " class="dialogUpload" :on-success="handleSuccess" :before-upload="beforeUpload" />
             <el-link v-if=" dialogStatus==='create' " :href="excelTemplateUrl" type="warning" style="margin-left: 10px;" target="_blank">Excel模板下载</el-link>
@@ -460,9 +460,10 @@ export default {
     // 弹出框-传递数据
     dialogHandleUpdate() {
       console.log(this.dialogStatus)
-      this.dialogList = null
-      this.dialogTotal = 0
-      this.dialogListLoading = false
+      // this.dialogList = null
+      // this.dialogTotal = 0
+      // this.dialogListLoading = false
+      this.dialogFormDataVisiable = true
     },
     // 选择日期
     pickerDateValue(val) {
