@@ -1,0 +1,1440 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API-参考文档</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","php","javascript","python"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="php">php</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                                  <a href="#" data-language-name="python">python</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='https://github.com/GabbyMrH'>Documentation Edit By GabbyMrH</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>信息</h1>
+<p>欢迎使用本API文档
+<a href="http://pasn.api.com/docs/collection.json">点击获取Postman请求集合</a></p>
+<!-- END_INFO -->
+<h1>general</h1>
+<!-- START_500afaeb794e1d5b3191b39fb749c91b -->
+<h2>PASN WEB API文档</h2>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/index" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/index',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/index"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/index'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/index</code></p>
+<!-- END_500afaeb794e1d5b3191b39fb749c91b -->
+<!-- START_605cdc53e7c36bc756aa4518148c2dc0 -->
+<h2>user login check</h2>
+<p>登录验证</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://pasn.api.com/v1/user?username=qui" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://pasn.api.com/v1/user',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'username' =&gt; 'qui',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/user"
+);
+
+let params = {
+    "username": "qui",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/user'
+params = {
+  'username': 'qui'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('POST', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wYXNuLmFwaS5jb21cL3YxXC91c2VyIiwiaWF0IjoxNTgzMzc5MjAwLCJleHAiOjE1ODMzODY0MDAsIm5iZiI6MTU4MzM3OTIwMCwianRpIjoiYVRPdU00aW1ZejVxUWFteCIsInN1YiI6MiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.vZjnZLIYRwu_USyHCFUCCVe1J14yUTdx1t4H2SGgUiY",
+    "token_type": "Bearer",
+    "expires_in": "120",
+    "code": 2001
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>POST /v1/user</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>username</code></td>
+<td>required</td>
+<td>账号</td>
+</tr>
+</tbody>
+</table>
+<!-- END_605cdc53e7c36bc756aa4518148c2dc0 -->
+<!-- START_12d9d4f8056003d77e6712272689ceb2 -->
+<h2>refresh user token</h2>
+<p>刷新token</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://pasn.api.com/v1/user/current" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;put(
+    'http://pasn.api.com/v1/user/current',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/user/current"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/user/current'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('PUT', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wYXNuLmFwaS5jb21cL3YxXC91c2VyIiwiaWF0IjoxNTgzMzgwOTQ3LCJleHAiOjE1ODMzODgxNDcsIm5iZiI6MTU4MzM4MDk0NywianRpIjoiZVNCcWJ2SzNQZXFscHZuNyIsInN1YiI6MiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.APLXxUp5wWk8mpWpWLUrUA78mkiz3HPcBTqow_3gQgo",
+    "token_type": "Bearer",
+    "expires_in": "120",
+    "code": 2001
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>PUT /v1/user/current</code></p>
+<!-- END_12d9d4f8056003d77e6712272689ceb2 -->
+<!-- START_5bcaf108890a0fa554969d5086f45d01 -->
+<h2>delete user token</h2>
+<p>删除token</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://pasn.api.com/v1/user/current" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://pasn.api.com/v1/user/current',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/user/current"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/user/current'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>DELETE /v1/user/current</code></p>
+<!-- END_5bcaf108890a0fa554969d5086f45d01 -->
+<!-- START_948a434031820e2c47e01fe9893bd270 -->
+<h2>dingTalk message</h2>
+<p>钉钉推送消息接口</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://pasn.api.com/v1/dingTest[/1]?message=animi" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://pasn.api.com/v1/dingTest[/1]',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'message' =&gt; 'animi',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/dingTest[/1]"
+);
+
+let params = {
+    "message": "animi",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/dingTest[/1]'
+params = {
+  'message': 'animi'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('POST', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "编写api文档测试-V2",
+    "code": 2001,
+    "msg": "ok"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>POST /v1/dingTest[/{message}]</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td>required</td>
+<td>信息内容</td>
+</tr>
+</tbody>
+</table>
+<!-- END_948a434031820e2c47e01fe9893bd270 -->
+<!-- START_9d01787a501dbefea532af1a9a6b7a9b -->
+<h2>password encryption</h2>
+<p>密码加密接口</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/secret?secret=quis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/secret',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'secret' =&gt; 'quis',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/secret"
+);
+
+let params = {
+    "secret": "quis",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/secret'
+params = {
+  'secret': 'quis'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "$2y$10$bjYB5CM75JOBmxPAi4KqxuSplXzkKF.m3gxIMugmWXOz7toB3K5fO",
+    "code": 2001,
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/secret</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>secret</code></td>
+<td>required</td>
+<td>要加密的参数</td>
+</tr>
+</tbody>
+</table>
+<!-- END_9d01787a501dbefea532af1a9a6b7a9b -->
+<!-- START_4191347324a0c063ce6ffd56dc118fb6 -->
+<h2>user info</h2>
+<p>用户信息</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/user" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/user',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/user"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/user'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "id": 2,
+        "name": "admin",
+        "username": "123456",
+        "created_at": "2019-12-19 15:08:23.910",
+        "updated_at": "2019-12-19 15:08:23.910",
+        "roles": "admin",
+        "avatar": "http:\/\/pasn.api.com\/assets\/avatar\/avatar.jpg",
+        "ed_customer_customer_id": "system"
+    },
+    "code": 2001,
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/user</code></p>
+<!-- END_4191347324a0c063ce6ffd56dc118fb6 -->
+<!-- START_adc96eee5cbaec937feedfacf1b4243f -->
+<h2>inventory total</h2>
+<p>inventory 总量</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/inventoryTotal" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/inventoryTotal',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/inventoryTotal"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/inventoryTotal'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "Tips": "返回分页后的入库列表，从中提取总数"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/inventoryTotal</code></p>
+<!-- END_adc96eee5cbaec937feedfacf1b4243f -->
+<!-- START_8a7d2f56235a93e9b3cbf2eaf1979377 -->
+<h2>warehouse list</h2>
+<p>仓库列表</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/warehouse" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/warehouse',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/warehouse"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/warehouse'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "warehouse_code": "PH"
+        },
+        {
+            "warehouse_code": "1999"
+        },
+        {
+            "warehouse_code": "KJJSZC"
+        },
+        {
+            "warehouse_code": "222"
+        }
+    ],
+    "code": 2001,
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/warehouse</code></p>
+<!-- END_8a7d2f56235a93e9b3cbf2eaf1979377 -->
+<!-- START_7e01c33c25ef45c343007f96d2a6c6d0 -->
+<h2>booking list</h2>
+<p>入库订单列表</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/inbound?ref_no=omnis&amp;booking_no=qui&amp;start_time%2Bend_time=sequi&amp;page=autem&amp;pge_limit=sint" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/inbound',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'ref_no' =&gt; 'omnis',
+            'booking_no' =&gt; 'qui',
+            'start_time+end_time' =&gt; 'sequi',
+            'page' =&gt; 'autem',
+            'pge_limit' =&gt; 'sint',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/inbound"
+);
+
+let params = {
+    "ref_no": "omnis",
+    "booking_no": "qui",
+    "start_time+end_time": "sequi",
+    "page": "autem",
+    "pge_limit": "sint",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound'
+params = {
+  'ref_no': 'omnis',
+  'booking_no': 'qui',
+  'start_time+end_time': 'sequi',
+  'page': 'autem',
+  'pge_limit': 'sint'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "booking_id": "58f5ec3a-ac1c-407e-88d4-57bcb8b8de25",
+                "order_id": "EC4249AA-D552-4231-9D1F-7D7C156D2000",
+                "customer_id": "system",
+                "booking_no": "1234",
+                "warehouse_code": "KJJSZC",
+                "booking_date": "2020-03-04 22:52:54.000",
+                "ref_no": "1234",
+                "truck_no": null,
+                "bill_no": null,
+                "order_qty": "12",
+                "order_gw": "0.0",
+                "order_cbm": "0.0",
+                "receipt_qty": "0",
+                "receipt_gw": "0.0",
+                "receipt_cbm": "0.0",
+                "create_by": " ",
+                "booking_status": "NEW",
+                "create_date": "2020-03-04 22:53:11.673",
+                "update_by": " ",
+                "update_date": "2020-03-04 22:53:12.290"
+            }
+        ],
+        "first_page_url": "http:\/\/pasn.api.com\/v1\/inbound?page=1",
+        "from": 1,
+        "last_page": 1348,
+        "last_page_url": "http:\/\/pasn.api.com\/v1\/inbound?page=1348",
+        "next_page_url": "http:\/\/pasn.api.com\/v1\/inbound?page=2",
+        "path": "http:\/\/pasn.api.com\/v1\/inbound",
+        "per_page": "1",
+        "prev_page_url": null,
+        "to": 1,
+        "total": 1348
+    },
+    "code": 2001,
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/inbound</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ref_no</code></td>
+<td>optional</td>
+<td>String 客户参考号</td>
+</tr>
+<tr>
+<td><code>booking_no</code></td>
+<td>optional</td>
+<td>String 入库预约号</td>
+</tr>
+<tr>
+<td><code>start_time+end_time</code></td>
+<td>optional</td>
+<td>Date 开始日期和结束日期</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>optional</td>
+<td>String 页码</td>
+</tr>
+<tr>
+<td><code>pge_limit</code></td>
+<td>optional</td>
+<td>String 每页显示条数</td>
+</tr>
+</tbody>
+</table>
+<!-- END_7e01c33c25ef45c343007f96d2a6c6d0 -->
+<!-- START_9368541e59aa128d712184971949a9bf -->
+<h2>add booking order</h2>
+<p>新增预约入库单</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://pasn.api.com/v1/inbound/add?ref_no=esse&amp;customer_id=doloribus&amp;booking_date=perspiciatis&amp;warehouse_code=quia&amp;booking_detail=ex" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://pasn.api.com/v1/inbound/add',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'ref_no' =&gt; 'esse',
+            'customer_id' =&gt; 'doloribus',
+            'booking_date' =&gt; 'perspiciatis',
+            'warehouse_code' =&gt; 'quia',
+            'booking_detail' =&gt; 'ex',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/inbound/add"
+);
+
+let params = {
+    "ref_no": "esse",
+    "customer_id": "doloribus",
+    "booking_date": "perspiciatis",
+    "warehouse_code": "quia",
+    "booking_detail": "ex",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound/add'
+params = {
+  'ref_no': 'esse',
+  'customer_id': 'doloribus',
+  'booking_date': 'perspiciatis',
+  'warehouse_code': 'quia',
+  'booking_detail': 'ex'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('POST', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "ref_no": "567",
+    "booking_date": "2020-03-05 14:25:45",
+    "warehouse_code": "PH",
+    "customer_id": "system",
+    "booking_detail": [
+        {
+            "ref_no": 567,
+            "po_no": "111",
+            "qty_case": "20",
+            "country": "dsad",
+            "case_length": 11,
+            "case_width": "22",
+            "case_height": 33,
+            "case_weight": 44
+        },
+        {
+            "ref_no": 567,
+            "po_no": "222",
+            "qty_case": "30",
+            "country": "fsa",
+            "case_length": 22,
+            "case_width": "33",
+            "case_height": 44,
+            "case_weight": 55
+        },
+        {
+            "ref_no": 567,
+            "po_no": "333",
+            "qty_case": "20",
+            "country": "fdsf",
+            "case_length": 33,
+            "case_width": "44",
+            "case_height": 55,
+            "case_weight": 66
+        }
+    ],
+    "code": "2001",
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>POST /v1/inbound/add</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ref_no</code></td>
+<td>required</td>
+<td>客户参考号</td>
+</tr>
+<tr>
+<td><code>customer_id</code></td>
+<td>required</td>
+<td>客户编码</td>
+</tr>
+<tr>
+<td><code>booking_date</code></td>
+<td>required</td>
+<td>创建日期</td>
+</tr>
+<tr>
+<td><code>warehouse_code</code></td>
+<td>required</td>
+<td>仓库编码</td>
+</tr>
+<tr>
+<td><code>booking_detail</code></td>
+<td>required</td>
+<td>货物信息(array)</td>
+</tr>
+</tbody>
+</table>
+<!-- END_9368541e59aa128d712184971949a9bf -->
+<!-- START_06e485123f0470d17c5f1cf2c4939786 -->
+<h2>/v1/inbound/edit</h2>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://pasn.api.com/v1/inbound/edit" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://pasn.api.com/v1/inbound/edit',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/inbound/edit"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound/edit'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('POST', url, headers=headers)
+response.json()</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>POST /v1/inbound/edit</code></p>
+<!-- END_06e485123f0470d17c5f1cf2c4939786 -->
+<!-- START_68e7ff0c4d0c4bb7264e93e44230c0ef -->
+<h2>booking detail list</h2>
+<p>入库货物详情单列表</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/inbound/detail?ref_no=labore" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/inbound/detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'ref_no' =&gt; 'labore',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/inbound/detail"
+);
+
+let params = {
+    "ref_no": "labore",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound/detail'
+params = {
+  'ref_no': 'labore'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "inboundid": "F6FAF1B5-5E11-4586-AF2C-92C19D43A848",
+                "booking_id": "58f5ec3a-ac1c-407e-88d4-57bcb8b8de25",
+                "line_num": null,
+                "ref_no": "1234",
+                "po_no": "312",
+                "country": "123",
+                "sku_code": null,
+                "sku_cname": null,
+                "sku_ename": null,
+                "sku_hscode": null,
+                "qty_case": "12",
+                "qty_pices": "0",
+                "sku_uom": null,
+                "sku_pack": null,
+                "case_length": "13.0",
+                "case_width": "313.0",
+                "case_height": "3132.0",
+                "case_weight": "313.0",
+                "case_upc": null,
+                "case_upc1": null,
+                "case_upc2": null,
+                "pick_line": null,
+                "qc_rate": "0.0",
+                "qc_mark": null,
+                "fba_warehouse": null,
+                "lot_attrib1": null,
+                "lot_attrib2": null,
+                "lot_attrib3": null,
+                "lot_attrib4": null,
+                "lot_attrib5": null,
+                "remarks": null,
+                "create_by": " ",
+                "create_date": "2020-03-04 22:53:11.793",
+                "update_by": " ",
+                "update_date": "2020-03-04 22:53:11.793",
+                "booking_date": "2020-03-04 22:52:54.000",
+                "order_qty": "12"
+            }
+        ],
+        "first_page_url": "http:\/\/pasn.api.com\/v1\/inbound\/detail?page=1",
+        "from": 1,
+        "last_page": 1,
+        "last_page_url": "http:\/\/pasn.api.com\/v1\/inbound\/detail?page=1",
+        "next_page_url": null,
+        "path": "http:\/\/pasn.api.com\/v1\/inbound\/detail",
+        "per_page": "1",
+        "prev_page_url": null,
+        "to": 1,
+        "total": 1
+    },
+    "code": 2001,
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/inbound/detail</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ref_no</code></td>
+<td>required</td>
+<td>客户参考号</td>
+</tr>
+</tbody>
+</table>
+<!-- END_68e7ff0c4d0c4bb7264e93e44230c0ef -->
+<!-- START_6d3320488f28281a6822364ad63e4568 -->
+<h2>inventory list</h2>
+<p>库存余额列表</p>
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://pasn.api.com/v1/inventory?page=esse&amp;page_limit=quod" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://pasn.api.com/v1/inventory',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+            'Api-Version' =&gt; 'v1',
+        ],
+        'query' =&gt; [
+            'page' =&gt; 'esse',
+            'page_limit' =&gt; 'quod',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://pasn.api.com/v1/inventory"
+);
+
+let params = {
+    "page": "esse",
+    "page_limit": "quod",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-python">import requests
+import json
+
+url = 'http://pasn.api.com/v1/inventory'
+params = {
+  'page': 'esse',
+  'page_limit': 'quod'
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+<blockquote>
+<p>返回示例 (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "PKID": "937ED92C-1D0C-4B07-AE20-0EFDBA251662",
+                "warehouse_code": "PH",
+                "customer_id": "ZB",
+                "sku_no": "FBA15K0DBJYCU000020",
+                "lot_no": "2D618FF5-462B-225A-AC12-F031A83A1E7A",
+                "po_no": "FBA15K0DBJYC",
+                "ref_no": "ZBSZ19120320",
+                "location_code": "STD",
+                "drap_id": "",
+                "qty": "1",
+                "QtyAllocated": "0",
+                "QtyPicked": "0",
+                "QtyPickInProcess": "0",
+                "QtyShipped": "0",
+                "create_by": "system",
+                "create_date": "2019-12-17 15:58:51.437",
+                "update_by": "system",
+                "update_date": "2019-12-17 15:58:51.437"
+            }
+        ],
+        "first_page_url": "http:\/\/pasn.api.com\/v1\/inventory?page=1",
+        "from": 1,
+        "last_page": 71529,
+        "last_page_url": "http:\/\/pasn.api.com\/v1\/inventory?page=71529",
+        "next_page_url": "http:\/\/pasn.api.com\/v1\/inventory?page=2",
+        "path": "http:\/\/pasn.api.com\/v1\/inventory",
+        "per_page": "1",
+        "prev_page_url": null,
+        "to": 1,
+        "total": 71529
+    },
+    "code": 2001,
+    "msg": "操作成功"
+}</code></pre>
+<h3>HTTP 请求</h3>
+<p><code>GET /v1/inventory</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>参 数</th>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page</code></td>
+<td>optional</td>
+<td>页码</td>
+</tr>
+<tr>
+<td><code>page_limit</code></td>
+<td>optional</td>
+<td>每页显示条数</td>
+</tr>
+</tbody>
+</table>
+<!-- END_6d3320488f28281a6822364ad63e4568 -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="php">php</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                                    <a href="#" data-language-name="python">python</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>
