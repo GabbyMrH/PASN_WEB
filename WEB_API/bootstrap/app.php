@@ -46,8 +46,10 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+// apidoc配置文件
+$app->configure('apidoc');
 //跨域配置
-//$app->configure('cors'); //似乎注销也可以 0.0
+$app->configure('cors');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -62,7 +64,10 @@ $app->singleton(
 $app->middleware([
     App\Http\Middleware\ExampleMiddleware::class,
     //跨域中间件
-    \Barryvdh\Cors\HandleCors::class,
+    Barryvdh\Cors\HandleCors::class,
+
+    // 注册其他请求中间件(PUT DELETE)
+    App\Http\Middleware\CrosMiddleware::class
 ]);
 
 $app->routeMiddleware([
@@ -87,7 +92,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 //开启其余artisan功能
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-//注册跨域服务
+// 注册跨域服务
 $app->register(Barryvdh\Cors\ServiceProvider::class);
 //注册redis服务
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
@@ -95,6 +100,8 @@ $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 //注册enum枚举包
 $app->register(\BenSampo\Enum\EnumServiceProvider::class);
+// 注册laravel-apidoc
+$app->register(\Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
 //注册compass
 //$app->register(\Davidhsianturi\Compass\CompassServiceProvider::class);
 
