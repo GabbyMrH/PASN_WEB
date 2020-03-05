@@ -11,13 +11,9 @@
 |
 */
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-
-
 $router->group(['prefix' => 'v1'], function ($router) {
+    // API首页
+    $router->get('index', 'ApiController@index');
     //获取token
     $router->post('user', 'AuthController@store');
     //刷新token
@@ -36,7 +32,6 @@ $router->group(['prefix' => 'v1'], function ($router) {
     //-接下来，该guard的配置就在该文件内找到了，就是默认的api guard，当前的服务提供者为users模型
 
     $router->group(['middleware' => 'auth:api'], function ($router) {
-        $router->get('test','InventoryController@test');
         $router->get('user', 'UsersController@info');
 
         /* 面板管理 */
