@@ -8,7 +8,27 @@ use Illuminate\Http\Request;
 class CommonController extends Controller
 {
     /**
-     * @return warehouse_code
+     * warehouse list
+     * 仓库列表
+     * @return \Illuminate\Http\JsonResponse
+     * @response {
+     *  "data": [
+     *   {
+     *  "warehouse_code": "PH"
+     *  },
+     *  {
+     *  "warehouse_code": "1999"
+     *  },
+     *  {
+     *  "warehouse_code": "KJJSZC"
+     *  },
+     *  {
+     *  "warehouse_code": "222"
+     *  }
+     *  ],
+     *  "code": 2001,
+     *  "msg": "操作成功"
+     *   }
      */
     public function warehouseList()
     {
