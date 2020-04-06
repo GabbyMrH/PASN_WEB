@@ -43,16 +43,23 @@ $router->group(['prefix' => 'v1'], function ($router) {
 
         /* 订单管理 */
 
-        // 预约入库-列表
+        // 预约入库
+        // 列表
         $router->get('inbound','InBoundController@queryList');
         // $router->post('detailImport','InBoundController@detailImport');
         // $router->get('test','InBoundController@test');
-        // 预约入库-增加
+        // 增加
         $router->post('inbound/add','InBoundController@queryAdd');
-        // 预约入库-编辑
-        $router->post('inbound/edit','InBoundController@queryEdit');
-        // 预约入库-增加-detail数据
+        // 编辑
+        $router->put('inbound/edit','InboundController@queryEdit');
+        // 删除
+        $router->delete('inbound/delete','InBoundController@queryDelete');
+        // detail-增加
         $router->get('inbound/detail','InBoundController@queryDetailList');
+        // detail-编辑
+        $router->put('inbound/detail','InBoundController@queryDetailEdit');
+        // detail-删除
+        $router->delete('inbound/detail','InBoundController@queryDetailDelete');
 
         // 库存余额
         $router->get('inventory','InventoryController@list');
