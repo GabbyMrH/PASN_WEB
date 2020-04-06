@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class EdBooking extends Model
@@ -92,10 +93,16 @@ class EdBooking extends Model
 
         $filter_condition = Arr::except($requestData, ['page', 'page_limit']);
         // 这里采用关联查询,传入闭包函数并传入关联的join实例和外部参数，在join实例内进行条件筛选再将筛选后的数据排序、筛选、去重、分页输出
-        return  $this->join('ed_booking_detail',function ($join) use ($requestData){
-                $join->on('ed_booking.booking_id','=','ed_booking_detail.booking_id')
-                    ->where(['ed_booking_detail.ref_no'=>$requestData['ref_no']]);
-                })->orderBy('booking_date','DESC')
+//        return  $this->join('ed_booking_detail',function ($join) use ($requestData){
+//                $join->on('ed_booking.booking_id','=','ed_booking_detail.booking_id')
+//                    ->where(['ed_booking_detail.ref_no'=>$requestData['ref_no']]);
+//                })->orderBy('booking_date','DESC')
+//                    ->select('ed_booking_detail.*','booking_date','order_qty')
+//                    ->distinct()
+//                    ->paginate($requestData['page_limit']);
+        return $this->join('ed_booking_detail','ed_booking_detail.booking_id','=','ed_booking.booking_id')
+                    ->where(['ed_booking_detail.booking_id'=>$requestData['booking_id']])
+                    ->orderBy('booking_date','DESC')
                     ->select('ed_booking_detail.*','booking_date','order_qty')
                     ->distinct()
                     ->paginate($requestData['page_limit']);
@@ -121,10 +128,15 @@ class EdBooking extends Model
 
     }
 
+    /**
+     * 添加入库单
+     * @param $requestData
+     * @return bool|string
+     */
     public function queryAdd($requestData)
     {
-        DB::beginTransaction(); // 开启事务
         try {
+            DB::beginTransaction(); // 开启事务
             //先写入主库booking库再写入从库detail库--注意主库的order_qty是对detail表的qty_case数目统计，而detail表的qty_case是每件货物的数量
             $filterData = Arr::except($requestData,['booking_detail']);
             $filterData['booking_id'] = Str::uuid();
@@ -160,6 +172,42 @@ class EdBooking extends Model
         } catch (\Exception $exception) {
             DB::rollBack(); //回滚事务
             return $exception->getMessage();
+        }
+        return true;
+    }
+
+    /**
+     * 编辑入库单
+     * @param $query
+     * @return bool
+     */
+    public function queryEdit($query)
+    {
+        $filterData = Arr::except($query,['booking_id']);
+        try {
+            $this->where('booking_id',$query['booking_id'])->update($filterData);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return $e->getMessage();
+        }
+        return true;
+    }
+
+    /**
+     * 删除入库单
+     * @param $query
+     * @return bool|string
+     */
+    public function queryDelete($query)
+    {
+        try {
+            // 先删除从表
+            EdBookingDetail::where('booking_id',$query['booking_id'])->delete();
+            // 删除主表
+            $this->where('booking_id',$query['booking_id'])->delete();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return $e->getMessage();
         }
         return true;
     }
