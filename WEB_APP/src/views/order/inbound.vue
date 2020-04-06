@@ -617,7 +617,7 @@ export default {
       this.dialogStatus = 'update'
       this.temp = Object.assign({}, row) // copy obj
       // 赋值给参数
-      this.dialogListQuery.ref_no = this.temp.ref_no
+      this.dialogListQuery.booking_id = this.temp.booking_id
       this.dialogListQuery.warehouse_code = this.temp.warehouse_code
       // 获取弹出框数据
       this.getDialogList()
