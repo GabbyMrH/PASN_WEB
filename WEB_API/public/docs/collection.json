@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Lumen API",
-        "_postman_id": "31023c0c-22df-4f2f-99ed-e190fa3a2d90",
+        "_postman_id": "350cbd3a-ba00-43e2-a272-135ab0c93bc3",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -57,7 +57,7 @@
                             "query": [
                                 {
                                     "key": "username",
-                                    "value": "qui",
+                                    "value": "sed",
                                     "description": "\u8d26\u53f7",
                                     "disabled": false
                                 }
@@ -172,7 +172,7 @@
                             "query": [
                                 {
                                     "key": "message",
-                                    "value": "animi",
+                                    "value": "eligendi",
                                     "description": "\u4fe1\u606f\u5185\u5bb9",
                                     "disabled": false
                                 }
@@ -215,7 +215,7 @@
                             "query": [
                                 {
                                     "key": "secret",
-                                    "value": "quis",
+                                    "value": "dolor",
                                     "description": "\u8981\u52a0\u5bc6\u7684\u53c2\u6570",
                                     "disabled": false
                                 }
@@ -366,31 +366,31 @@
                             "query": [
                                 {
                                     "key": "ref_no",
-                                    "value": "omnis",
+                                    "value": "nisi",
                                     "description": "String \u5ba2\u6237\u53c2\u8003\u53f7",
                                     "disabled": false
                                 },
                                 {
                                     "key": "booking_no",
-                                    "value": "qui",
+                                    "value": "est",
                                     "description": "String \u5165\u5e93\u9884\u7ea6\u53f7",
                                     "disabled": false
                                 },
                                 {
                                     "key": "start_time+end_time",
-                                    "value": "sequi",
+                                    "value": "omnis",
                                     "description": "Date \u5f00\u59cb\u65e5\u671f\u548c\u7ed3\u675f\u65e5\u671f",
                                     "disabled": false
                                 },
                                 {
                                     "key": "page",
-                                    "value": "autem",
+                                    "value": "et",
                                     "description": "String \u9875\u7801",
                                     "disabled": false
                                 },
                                 {
                                     "key": "pge_limit",
-                                    "value": "sint",
+                                    "value": "molestiae",
                                     "description": "String \u6bcf\u9875\u663e\u793a\u6761\u6570",
                                     "disabled": false
                                 }
@@ -433,31 +433,31 @@
                             "query": [
                                 {
                                     "key": "ref_no",
-                                    "value": "esse",
+                                    "value": "autem",
                                     "description": "\u5ba2\u6237\u53c2\u8003\u53f7",
                                     "disabled": false
                                 },
                                 {
                                     "key": "customer_id",
-                                    "value": "doloribus",
+                                    "value": "sed",
                                     "description": "\u5ba2\u6237\u7f16\u7801",
                                     "disabled": false
                                 },
                                 {
                                     "key": "booking_date",
-                                    "value": "perspiciatis",
+                                    "value": "sed",
                                     "description": "\u521b\u5efa\u65e5\u671f",
                                     "disabled": false
                                 },
                                 {
                                     "key": "warehouse_code",
-                                    "value": "quia",
+                                    "value": "autem",
                                     "description": "\u4ed3\u5e93\u7f16\u7801",
                                     "disabled": false
                                 },
                                 {
                                     "key": "booking_detail",
-                                    "value": "ex",
+                                    "value": "quos",
                                     "description": "\u8d27\u7269\u4fe1\u606f(array)",
                                     "disabled": false
                                 }
@@ -491,7 +491,7 @@
                     }
                 },
                 {
-                    "name": "\/v1\/inbound\/edit",
+                    "name": "Request edit inbound order\n\u7f16\u8f91\u5165\u5e93\u5355",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -499,7 +499,43 @@
                             "path": "\/v1\/inbound\/edit",
                             "query": []
                         },
-                        "method": "POST",
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Api-Version",
+                                "value": "v1"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Request delete inbound order\n\u5220\u9664\u5165\u5e93\u5355",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "pasn.api.com",
+                            "path": "\/v1\/inbound\/delete",
+                            "query": []
+                        },
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -536,13 +572,85 @@
                             "query": [
                                 {
                                     "key": "ref_no",
-                                    "value": "labore",
+                                    "value": "provident",
                                     "description": "\u5ba2\u6237\u53c2\u8003\u53f7",
                                     "disabled": false
                                 }
                             ]
                         },
                         "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Api-Version",
+                                "value": "v1"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Request edit inbound detail order\n\u7f16\u8f91inbound detail\u8ba2\u5355",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "pasn.api.com",
+                            "path": "\/v1\/inbound\/detail",
+                            "query": []
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {token}"
+                            },
+                            {
+                                "key": "Api-Version",
+                                "value": "v1"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Request delete inbound detail order\n\u5220\u9664inbound detail\u8ba2\u5355",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "pasn.api.com",
+                            "path": "\/v1\/inbound\/detail",
+                            "query": []
+                        },
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -579,13 +687,13 @@
                             "query": [
                                 {
                                     "key": "page",
-                                    "value": "esse",
+                                    "value": "sint",
                                     "description": "\u9875\u7801",
                                     "disabled": false
                                 },
                                 {
                                     "key": "page_limit",
-                                    "value": "quod",
+                                    "value": "mollitia",
                                     "description": "\u6bcf\u9875\u663e\u793a\u6761\u6570",
                                     "disabled": false
                                 }

@@ -114,7 +114,7 @@ null
 
 ```bash
 curl -X POST \
-    "http://pasn.api.com/v1/user?username=qui" \
+    "http://pasn.api.com/v1/user?username=sed" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -134,7 +134,7 @@ $response = $client->post(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'username' => 'qui',
+            'username' => 'sed',
         ],
     ]
 );
@@ -148,7 +148,7 @@ const url = new URL(
 );
 
 let params = {
-    "username": "qui",
+    "username": "sed",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -174,7 +174,7 @@ import json
 
 url = 'http://pasn.api.com/v1/user'
 params = {
-  'username': 'qui'
+  'username': 'sed'
 }
 headers = {
   'Content-Type': 'application/json',
@@ -384,7 +384,7 @@ null
 
 ```bash
 curl -X POST \
-    "http://pasn.api.com/v1/dingTest[/1]?message=animi" \
+    "http://pasn.api.com/v1/dingTest[/1]?message=eligendi" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -404,7 +404,7 @@ $response = $client->post(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'message' => 'animi',
+            'message' => 'eligendi',
         ],
     ]
 );
@@ -418,7 +418,7 @@ const url = new URL(
 );
 
 let params = {
-    "message": "animi",
+    "message": "eligendi",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -444,7 +444,7 @@ import json
 
 url = 'http://pasn.api.com/v1/dingTest[/1]'
 params = {
-  'message': 'animi'
+  'message': 'eligendi'
 }
 headers = {
   'Content-Type': 'application/json',
@@ -486,7 +486,7 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://pasn.api.com/v1/secret?secret=quis" \
+    -G "http://pasn.api.com/v1/secret?secret=dolor" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -506,7 +506,7 @@ $response = $client->get(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'secret' => 'quis',
+            'secret' => 'dolor',
         ],
     ]
 );
@@ -520,7 +520,7 @@ const url = new URL(
 );
 
 let params = {
-    "secret": "quis",
+    "secret": "dolor",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -546,7 +546,7 @@ import json
 
 url = 'http://pasn.api.com/v1/secret'
 params = {
-  'secret': 'quis'
+  'secret': 'dolor'
 }
 headers = {
   'Content-Type': 'application/json',
@@ -863,7 +863,7 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://pasn.api.com/v1/inbound?ref_no=omnis&booking_no=qui&start_time%2Bend_time=sequi&page=autem&pge_limit=sint" \
+    -G "http://pasn.api.com/v1/inbound?ref_no=nisi&booking_no=est&start_time%2Bend_time=omnis&page=et&pge_limit=molestiae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -883,11 +883,11 @@ $response = $client->get(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'ref_no' => 'omnis',
-            'booking_no' => 'qui',
-            'start_time+end_time' => 'sequi',
-            'page' => 'autem',
-            'pge_limit' => 'sint',
+            'ref_no' => 'nisi',
+            'booking_no' => 'est',
+            'start_time+end_time' => 'omnis',
+            'page' => 'et',
+            'pge_limit' => 'molestiae',
         ],
     ]
 );
@@ -901,11 +901,11 @@ const url = new URL(
 );
 
 let params = {
-    "ref_no": "omnis",
-    "booking_no": "qui",
-    "start_time+end_time": "sequi",
-    "page": "autem",
-    "pge_limit": "sint",
+    "ref_no": "nisi",
+    "booking_no": "est",
+    "start_time+end_time": "omnis",
+    "page": "et",
+    "pge_limit": "molestiae",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -931,11 +931,11 @@ import json
 
 url = 'http://pasn.api.com/v1/inbound'
 params = {
-  'ref_no': 'omnis',
-  'booking_no': 'qui',
-  'start_time+end_time': 'sequi',
-  'page': 'autem',
-  'pge_limit': 'sint'
+  'ref_no': 'nisi',
+  'booking_no': 'est',
+  'start_time+end_time': 'omnis',
+  'page': 'et',
+  'pge_limit': 'molestiae'
 }
 headers = {
   'Content-Type': 'application/json',
@@ -1017,7 +1017,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://pasn.api.com/v1/inbound/add?ref_no=esse&customer_id=doloribus&booking_date=perspiciatis&warehouse_code=quia&booking_detail=ex" \
+    "http://pasn.api.com/v1/inbound/add?ref_no=autem&customer_id=sed&booking_date=sed&warehouse_code=autem&booking_detail=quos" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -1037,11 +1037,11 @@ $response = $client->post(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'ref_no' => 'esse',
-            'customer_id' => 'doloribus',
-            'booking_date' => 'perspiciatis',
-            'warehouse_code' => 'quia',
-            'booking_detail' => 'ex',
+            'ref_no' => 'autem',
+            'customer_id' => 'sed',
+            'booking_date' => 'sed',
+            'warehouse_code' => 'autem',
+            'booking_detail' => 'quos',
         ],
     ]
 );
@@ -1055,11 +1055,11 @@ const url = new URL(
 );
 
 let params = {
-    "ref_no": "esse",
-    "customer_id": "doloribus",
-    "booking_date": "perspiciatis",
-    "warehouse_code": "quia",
-    "booking_detail": "ex",
+    "ref_no": "autem",
+    "customer_id": "sed",
+    "booking_date": "sed",
+    "warehouse_code": "autem",
+    "booking_detail": "quos",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1085,11 +1085,11 @@ import json
 
 url = 'http://pasn.api.com/v1/inbound/add'
 params = {
-  'ref_no': 'esse',
-  'customer_id': 'doloribus',
-  'booking_date': 'perspiciatis',
-  'warehouse_code': 'quia',
-  'booking_detail': 'ex'
+  'ref_no': 'autem',
+  'customer_id': 'sed',
+  'booking_date': 'sed',
+  'warehouse_code': 'autem',
+  'booking_detail': 'quos'
 }
 headers = {
   'Content-Type': 'application/json',
@@ -1162,12 +1162,14 @@ response.json()
 
 <!-- END_9368541e59aa128d712184971949a9bf -->
 
-<!-- START_06e485123f0470d17c5f1cf2c4939786 -->
-## /v1/inbound/edit
+<!-- START_bcd933abc2568abf4c23126985ae1ce4 -->
+## Request edit inbound order
+编辑入库单
+
 > 请求示例:
 
 ```bash
-curl -X POST \
+curl -X PUT \
     "http://pasn.api.com/v1/inbound/edit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
@@ -1178,7 +1180,7 @@ curl -X POST \
 ```php
 
 $client = new \GuzzleHttp\Client();
-$response = $client->post(
+$response = $client->put(
     'http://pasn.api.com/v1/inbound/edit',
     [
         'headers' => [
@@ -1206,7 +1208,7 @@ let headers = {
 };
 
 fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: headers,
 })
     .then(response => response.json())
@@ -1224,17 +1226,93 @@ headers = {
   'Authorization': 'Bearer {token}',
   'Api-Version': 'v1'
 }
-response = requests.request('POST', url, headers=headers)
+response = requests.request('PUT', url, headers=headers)
 response.json()
 ```
 
 
 
 ### HTTP 请求
-`POST /v1/inbound/edit`
+`PUT /v1/inbound/edit`
 
 
-<!-- END_06e485123f0470d17c5f1cf2c4939786 -->
+<!-- END_bcd933abc2568abf4c23126985ae1ce4 -->
+
+<!-- START_8a656263015475e3be4513470f1ee954 -->
+## Request delete inbound order
+删除入库单
+
+> 请求示例:
+
+```bash
+curl -X DELETE \
+    "http://pasn.api.com/v1/inbound/delete" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://pasn.api.com/v1/inbound/delete',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+            'Api-Version' => 'v1',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://pasn.api.com/v1/inbound/delete"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound/delete'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('DELETE', url, headers=headers)
+response.json()
+```
+
+
+
+### HTTP 请求
+`DELETE /v1/inbound/delete`
+
+
+<!-- END_8a656263015475e3be4513470f1ee954 -->
 
 <!-- START_68e7ff0c4d0c4bb7264e93e44230c0ef -->
 ## booking detail list
@@ -1244,7 +1322,7 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://pasn.api.com/v1/inbound/detail?ref_no=labore" \
+    -G "http://pasn.api.com/v1/inbound/detail?ref_no=provident" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -1264,7 +1342,7 @@ $response = $client->get(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'ref_no' => 'labore',
+            'ref_no' => 'provident',
         ],
     ]
 );
@@ -1278,7 +1356,7 @@ const url = new URL(
 );
 
 let params = {
-    "ref_no": "labore",
+    "ref_no": "provident",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1304,7 +1382,7 @@ import json
 
 url = 'http://pasn.api.com/v1/inbound/detail'
 params = {
-  'ref_no': 'labore'
+  'ref_no': 'provident'
 }
 headers = {
   'Content-Type': 'application/json',
@@ -1391,6 +1469,158 @@ response.json()
 
 <!-- END_68e7ff0c4d0c4bb7264e93e44230c0ef -->
 
+<!-- START_4d9591bd429ac4d762c03703e8ceff1e -->
+## Request edit inbound detail order
+编辑inbound detail订单
+
+> 请求示例:
+
+```bash
+curl -X PUT \
+    "http://pasn.api.com/v1/inbound/detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->put(
+    'http://pasn.api.com/v1/inbound/detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+            'Api-Version' => 'v1',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://pasn.api.com/v1/inbound/detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound/detail'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('PUT', url, headers=headers)
+response.json()
+```
+
+
+
+### HTTP 请求
+`PUT /v1/inbound/detail`
+
+
+<!-- END_4d9591bd429ac4d762c03703e8ceff1e -->
+
+<!-- START_c7f50ac85546007ddbcc163f7a89fb7d -->
+## Request delete inbound detail order
+删除inbound detail订单
+
+> 请求示例:
+
+```bash
+curl -X DELETE \
+    "http://pasn.api.com/v1/inbound/detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -H "Api-Version: v1"
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://pasn.api.com/v1/inbound/detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+            'Api-Version' => 'v1',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://pasn.api.com/v1/inbound/detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+    "Api-Version": "v1",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://pasn.api.com/v1/inbound/detail'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {token}',
+  'Api-Version': 'v1'
+}
+response = requests.request('DELETE', url, headers=headers)
+response.json()
+```
+
+
+
+### HTTP 请求
+`DELETE /v1/inbound/detail`
+
+
+<!-- END_c7f50ac85546007ddbcc163f7a89fb7d -->
+
 <!-- START_6d3320488f28281a6822364ad63e4568 -->
 ## inventory list
 库存余额列表
@@ -1399,7 +1629,7 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://pasn.api.com/v1/inventory?page=esse&page_limit=quod" \
+    -G "http://pasn.api.com/v1/inventory?page=sint&page_limit=mollitia" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -1419,8 +1649,8 @@ $response = $client->get(
             'Api-Version' => 'v1',
         ],
         'query' => [
-            'page' => 'esse',
-            'page_limit' => 'quod',
+            'page' => 'sint',
+            'page_limit' => 'mollitia',
         ],
     ]
 );
@@ -1434,8 +1664,8 @@ const url = new URL(
 );
 
 let params = {
-    "page": "esse",
-    "page_limit": "quod",
+    "page": "sint",
+    "page_limit": "mollitia",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1461,8 +1691,8 @@ import json
 
 url = 'http://pasn.api.com/v1/inventory'
 params = {
-  'page': 'esse',
-  'page_limit': 'quod'
+  'page': 'sint',
+  'page_limit': 'mollitia'
 }
 headers = {
   'Content-Type': 'application/json',
