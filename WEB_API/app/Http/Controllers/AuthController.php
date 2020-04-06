@@ -35,13 +35,16 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        $data_check = Validator::make($request->all(), [
+        $dataCheck = Validator::make($request->all(), [
             'username' => 'required',
             'password' => 'required'
+        ],[
+            'username.required'=>'账号必填',
+            'password.required'=>'密码必填'
         ]);
 
-        if ($data_check->fails()) {
-            return response()->json(StatusController::paramError());
+        if ($dataCheck->fails()) {
+            return response()->json(StatusController::paramError($dataCheck->getMessageBag()->first()));
         }
         //验证数据表数据
         $token = Auth::guard('api')->attempt([
@@ -100,7 +103,7 @@ class AuthController extends Controller
      * null
      * }
      */
-    public function destroy(Request $request)
+    public function destroy()
     {
         Auth::guard('api')->logout();
         //$data = $request->header('Bearer-Token');
