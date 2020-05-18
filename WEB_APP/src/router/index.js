@@ -193,10 +193,24 @@ export const asyncRoutes = [
         meta: { title: 'inBound', icon: 'inbound', noCache: true }
       },
       {
+        path: 'inbound-create-or-update',
+        component: () => import('@/views/order/inbound/components/CreateOrUpdate'),
+        name: 'InBoundCreateOrUpdate',
+        meta: { title: 'inBoundCreateOrUpdate', noCache: true },
+        hidden: true
+      },
+      {
         path: 'outbound',
         component: () => import('@/views/order/outbound'),
         name: 'OutBound',
         meta: { title: 'outBound', icon: 'outbound', noCache: true }
+      },
+      {
+        path: 'outbound-create-or-update',
+        component: () => import('@/views/order/outbound/components/CreateOrUpdate'),
+        name: 'OutBoundCreateOrUpdate',
+        meta: { title: 'outBoundCreateOrUpdate', noCache: true },
+        hidden: true
       },
       {
         path: 'inventory',
