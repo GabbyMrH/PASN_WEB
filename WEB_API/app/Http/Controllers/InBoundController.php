@@ -157,17 +157,11 @@ class InBoundController extends Controller
      */
     public function queryDetailList(Request $request, EdBooking $edBooking)
     {
-        // 自定义验证器验证参数
-        $validator = Validator::make($request->all(), [
-            'booking_id' => 'required|exists:ed_booking',
-        ], [
-            'booking_id.required' => 'booking_id必填',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(StatusController::paramError($request->all(), $validator->errors()->first()));
-        }
+        $requestData = $request->all();
+        $requestData['page'] = isset($requestData['page']) ? $requestData['page'] : 1;
+        $requestData['page_limit'] = isset($requestData['page_limit']) ? $requestData['page_limit'] : 20;
         //将传递参数对象交由模型处理
-        $results = $edBooking->queryDetailList($request->all());
+        $results = $edBooking->queryDetailList($requestData);
         return response()->json(StatusController::success($results));
     }
 
@@ -203,7 +197,7 @@ class InBoundController extends Controller
             'customer_id' => 'required',
             'booking_date' => 'required',
             'warehouse_code' => 'required',
-            'booking_detail' => 'required|array'
+            'booking_detail' => 'required'
         ], [
             'ref_no.required' => 'ref_no必填',
             'customer_id.required' => 'customer_id必填',
@@ -228,19 +222,19 @@ class InBoundController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function queryEdit(Request $request, EdBooking $edBooking)
-    {
-        $validator = Validator::make($request->all(),[
-            'booking_id'=>'required|exists:ed_booking'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(StatusController::paramError($request->all(), $validator->errors()->first()));
-        }
-        // 注意：需要判断传递过来的状态，为new则可编辑，为RECEIPTING则不能编辑
-        $result = $edBooking->queryEdit(array_filter($request->all()));
-        return $result ? response()->json(StatusController::success($request->all())) :
-            response()->json(StatusController::fails($result));
-    }
+//    public function queryEdit(Request $request, EdBooking $edBooking)
+//    {
+//        $validator = Validator::make($request->all(),[
+//            'inboundid'=>'required'
+//        ]);
+//        if ($validator->fails()) {
+//            return response()->json(StatusController::paramError($request->all(), $validator->errors()->first()));
+//        }
+//        // 注意：需要判断传递过来的状态，为new则可编辑，为RECEIPTING则不能编辑
+//        $result = $edBooking->queryEdit(array_filter($request->all()));
+//        return $result ? response()->json(StatusController::success($result)) :
+//            response()->json(StatusController::fails($result));
+//    }
 
     /**
      * Request delete inbound order
@@ -272,7 +266,6 @@ class InBoundController extends Controller
     public function queryDetailEdit(Request $request, EdBookingDetail $edBookingDetail)
     {
         $validator = Validator::make($request->all(),[
-            'booking_id'=>'required|exists:ed_booking_detail',
             'inboundid'=>'required|exists:ed_booking_detail'
         ]);
         if ($validator->fails()) {
@@ -293,7 +286,6 @@ class InBoundController extends Controller
     public function queryDetailDelete(Request $request, EdBookingDetail $edBookingDetail)
     {
         $validator = Validator::make($request->all(),[
-            'booking_id'=>'required|exists:ed_booking_detail',
             'inboundid'=>'required|exists:ed_booking_detail'
         ]);
         if ($validator->fails()) {
