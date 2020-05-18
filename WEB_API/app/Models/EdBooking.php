@@ -15,6 +15,7 @@ class EdBooking extends Model
     protected $table = 'ed_booking';
     protected $primaryKey = 'booking_id';
     public $incrementing = false;
+    protected $guarded = [''];
     // 定义数据库自动写入时间字段
     const CREATED_AT = 'create_date';
     const UPDATED_AT = 'update_date';
@@ -100,31 +101,17 @@ class EdBooking extends Model
 //                    ->select('ed_booking_detail.*','booking_date','order_qty')
 //                    ->distinct()
 //                    ->paginate($requestData['page_limit']);
-        return $this->join('ed_booking_detail','ed_booking_detail.booking_id','=','ed_booking.booking_id')
-                    ->where(['ed_booking_detail.booking_id'=>$requestData['booking_id']])
-                    ->orderBy('booking_date','DESC')
-                    ->select('ed_booking_detail.*','booking_date','order_qty')
-                    ->distinct()
-                    ->paginate($requestData['page_limit']);
-        //当前以上面这种方式测试返回的数据是与下面一样的，所以采用上面简洁法
-
-//        if(self::$customer_id != CustomerType::admin ){
-//            return  $this->join('ed_booking_detail',function ($join) use ($requestData){
-//                    $join->on('ed_booking.booking_id','=','ed_booking_detail.booking_id')
-//                        ->where(['ed_booking_detail.ref_no'=>$requestData['ref_no']]);
-//                        })->where($filter_condition)
-//                            ->orderBy('booking_date','DESC')
-//                            ->select('ed_booking_detail.*','booking_date')
-//                            ->distinct()
-//                            ->paginate($requestData['page_limit']);
-//        }
-//        return  $this->join('ed_booking_detail',function ($join) use ($requestData){
-//                $join->on('ed_booking.booking_id','=','ed_booking_detail.booking_id')
-//                    ->where(['ed_booking_detail.ref_no'=>$requestData['ref_no']]);
-//                    })->orderBy('booking_date','DESC')
-//                        ->select('ed_booking_detail.*','booking_date')
-//                        ->distinct()
-//                        ->paginate($requestData['page_limit']);
+//        return $this->join('ed_booking_detail','ed_booking_detail.booking_id','=','ed_booking.booking_id')
+////                    ->where(['ed_booking_detail.booking_id'=>$requestData['booking_id']])
+//                    ->orderBy('booking_date','DESC')
+//                    ->select('ed_booking_detail.*','booking_date','order_qty')
+//                    ->distinct()
+//                    ->paginate($requestData['page_limit']);
+        if(isset($requestData['booking_id'])){
+            // return EdBooking::find($requestData['booking_id'])->details()->distinct()->paginate();
+            return EdBooking::with('details')->whereBookingId($requestData['booking_id'])->first();
+        }
+        return null;
 
     }
 
@@ -138,7 +125,7 @@ class EdBooking extends Model
         try {
             DB::beginTransaction(); // 开启事务
             //先写入主库booking库再写入从库detail库--注意主库的order_qty是对detail表的qty_case数目统计，而detail表的qty_case是每件货物的数量
-            $filterData = Arr::except($requestData,['booking_detail']);
+            $filterData = Arr::except($requestData,['booking_detail','booking_detail_total']);
             $filterData['booking_id'] = Str::uuid();
             $bookingInsert = $this->insert($filterData);
 
@@ -171,30 +158,32 @@ class EdBooking extends Model
             DB::commit();  //提交事务
         } catch (\Exception $exception) {
             DB::rollBack(); //回滚事务
-            return $exception->getMessage();
+            Log::error($exception->getMessage());
+            return false;
         }
         return true;
     }
 
     /**
-     * 编辑入库单
+     * 编辑入库详情单
      * @param $query
      * @return bool
      */
-    public function queryEdit($query)
-    {
-        $filterData = Arr::except($query,['booking_id']);
-        try {
-            $this->where('booking_id',$query['booking_id'])->update($filterData);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return $e->getMessage();
-        }
-        return true;
-    }
+//    public function queryEdit($query)
+//    {
+//        $filterData = Arr::except($query,['inboundid']);
+//        $decodeData = json_decode($filterData['booking_detail'][0],true);
+//        try {
+//            EdBookingDetail::where('inboundid',$query['inboundid'])->update($decodeData);
+//        } catch (\Exception $e) {
+//            Log::error($e->getMessage());
+//            return false;
+//        }
+//        return true;
+//    }
 
     /**
-     * 删除入库单
+     * 删除入库详情单
      * @param $query
      * @return bool|string
      */
