@@ -51,10 +51,10 @@ $router->group(['prefix' => 'v1'], function ($router) {
         // 增加
         $router->post('inbound/add','InBoundController@queryAdd');
         // 编辑
-        $router->put('inbound/edit','InboundController@queryEdit');
+//        $router->put('inbound/edit','InboundController@queryEdit');
         // 删除
         $router->delete('inbound/delete','InBoundController@queryDelete');
-        // detail-增加
+        // detail-列表
         $router->get('inbound/detail','InBoundController@queryDetailList');
         // detail-编辑
         $router->put('inbound/detail','InBoundController@queryDetailEdit');
