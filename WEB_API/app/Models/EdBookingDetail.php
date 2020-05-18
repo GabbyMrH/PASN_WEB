@@ -31,15 +31,13 @@ class EdBookingDetail extends Model
     // 编辑detail
     public function queryEdit($query)
     {
-        $filterData = Arr::except($query,['booking_id','inboundid']);
+        $filterData = Arr::except($query,['inboundid']);
+        $decodeData = json_decode($filterData['booking_detail'][0],true);
         try {
-            $this->where([
-                'inboundid'=>$query['inboundid'],
-                'booking_id'=>$query['booking_id']
-            ])->update($filterData);
-        } catch(\Exception $e) {
+            EdBookingDetail::where('inboundid',$query['inboundid'])->update($decodeData);
+        } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return $e->getMessage();
+            return false;
         }
         return true;
 
@@ -49,12 +47,11 @@ class EdBookingDetail extends Model
     {
         try {
             $this->where([
-                'inboundid'=>$query['inboundid'],
-                'booking_id'=>$query['booking_id']
+                'inboundid'=>$query['inboundid']
             ])->delete();
         } catch(\Exception $e) {
             Log::error($e->getMessage());
-            return $e->getMessage();
+            return false;
         }
         return true;
     }
