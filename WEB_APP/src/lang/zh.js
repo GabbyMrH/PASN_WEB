@@ -10,6 +10,7 @@ export default {
     user: '用户管理',
     'myProfile': '个人资料',
     'userList': '用户列表',
+    invoice: '发票管理',
     documentation: '文档',
     guide: '引导页',
     permission: '权限测试页',
