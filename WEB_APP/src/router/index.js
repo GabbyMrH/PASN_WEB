@@ -221,6 +221,23 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/invoice',
+    component: Layout,
+    name: 'Invoice',
+    meta: {
+      title: 'invoice',
+      icon: 'skill'
+    },
+    children: [
+      {
+        path: 'invoice-index',
+        component: () => import('@/views/invoice/index'),
+        name: 'InvoiceIndex',
+        meta: { title: 'invoice', icon: 'skill', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/user',
     component: Layout,
     name: 'User',
