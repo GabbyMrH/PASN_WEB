@@ -61,6 +61,18 @@ $router->group(['prefix' => 'v1'], function ($router) {
         // detail-删除
         $router->delete('inbound/detail','InBoundController@queryDetailDelete');
 
+        // 预约出库-列表
+        $router->get('outbound','OutBoundController@index');
+        $router->get('outbound/detail','OutBoundController@detailList');
+        // 写入数据
+        $router->post('outbound','OutBoundController@queryInsert');
+        // 编辑数据
+        $router->put('outbound/detail','OutBoundController@queryEdit');
+        // 删除主数据
+        $router->delete('outbound','OutBoundController@queryDelete');
+        // 删除-detail
+        $router->delete('outbound/detail','OutBoundController@queryDeleteDetail');
+
         // 库存余额
         $router->get('inventory','InventoryController@list');
     });
