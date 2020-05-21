@@ -111,7 +111,7 @@ import Pagination from '@/components/Pagination' // secondary package based on e
 // import { warehouseList } from '@/api/common'
 
 export default {
-  name: 'Inbound',
+  name: 'InBound',
   components: { Pagination },
   directives: { waves },
   filters: {
