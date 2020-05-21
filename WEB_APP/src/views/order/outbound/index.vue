@@ -1,82 +1,86 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-input v-model="listQuery.ref_no" clearable :placeholder="$t('table.ref_no')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="listQuery.order_no" clearable placeholder="出库单号" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-date-picker
-        v-model="pickerDate"
-        class="filter-item"
-        type="daterange"
-        align="right"
-        unlink-panels
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        value-format="yyyy-MM-dd"
-        :picker-options="pickerOptions"
-        @change="pickerDateValue"
-      />
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        {{ $t('table.search') }}
-      </el-button>
-    </div>
+    <el-card class="box-card">
+      <div class="filter-container">
+        <el-input v-model="listQuery.ref_no" clearable :placeholder="$t('table.ref_no')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+        <el-input v-model="listQuery.order_no" clearable placeholder="出库单号" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+        <el-date-picker
+          v-model="pickerDate"
+          class="filter-item"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          value-format="yyyy-MM-dd"
+          :picker-options="pickerOptions"
+          @change="pickerDateValue"
+        />
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+          {{ $t('table.search') }}
+        </el-button>
+      </div>
+    </el-card>
 
-    <el-row class="table-style">
-      <el-col class="table-button">
-        <router-link :to="{ name:'OutBoundCreateOrUpdate', params: createOrUpdateData }">
-          <el-button v-waves plain icon="el-icon-plus" size="small" @click="handleCreate()">创建订单</el-button>
-        </router-link>
-        <!-- <el-button v-waves plain type="primary" icon="el-icon-edit" size="small">编辑</el-button> -->
-        <!-- <el-button v-waves plain type="danger" icon="el-icon-delete" size="small">批量删除</el-button> -->
-        <!-- <el-button v-waves plain type="success" icon="el-icon-tickets" size="small">收货报告</el-button> -->
-      </el-col>
-      <el-col>
-        <el-table
-          :key="tableKey"
-          v-loading="listLoading"
-          :data="list"
-          border
-          fit
-          highlight-current-row
-          :header-cell-style="{background:'#ebeef5'}"
-          style="width: 100%;"
-        >
-          <el-table-column
-            type="index"
-            width="55"
-            align="center"
-            label="序号"
-          />
-          <el-table-column :label="$t('table.ref_no')" prop="ref_no" align="center" />
-          <el-table-column label="出库单号" prop="order_no" align="center" />
-          <el-table-column label="订单日期" align="center" prop="issue_date" sortable>
-            <template slot-scope="{row}">
-              <span>{{ row.issue_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="状态" align="center" prop="issue_status">
-            <template slot-scope="{row}">
-              <el-tag :type="row.issue_status | statusFilter">
-                {{ row.issue_status }}
-              </el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column label="订单数量" align="center" prop="order_qty" sortable />
-          <el-table-column :label="$t('table.actions')" align="center" width="160" class-name="small-padding fixed-width">
-            <template slot-scope="{row}">
-              <router-link :to="{ name:'OutBoundCreateOrUpdate', params: createOrUpdateData }">
-                <el-button v-if="row.issue_status == 'NEW' " type="primary" size="mini" @click="handleUpdate(row)">
-                  {{ $t('table.edit') }}
+    <el-card class="box-card" style="margin-top: 20px;">
+      <el-row class="table-style">
+        <el-col class="table-button">
+          <router-link :to="{ name:'OutBoundCreateOrUpdate', params: createOrUpdateData }">
+            <el-button v-waves plain icon="el-icon-plus" size="small" @click="handleCreate()">创建订单</el-button>
+          </router-link>
+          <!-- <el-button v-waves plain type="primary" icon="el-icon-edit" size="small">编辑</el-button> -->
+          <!-- <el-button v-waves plain type="danger" icon="el-icon-delete" size="small">批量删除</el-button> -->
+          <!-- <el-button v-waves plain type="success" icon="el-icon-tickets" size="small">收货报告</el-button> -->
+        </el-col>
+        <el-col>
+          <el-table
+            :key="tableKey"
+            v-loading="listLoading"
+            :data="list"
+            border
+            fit
+            highlight-current-row
+            :header-cell-style="{background:'#ebeef5'}"
+            style="width: 100%;"
+          >
+            <el-table-column
+              type="index"
+              width="55"
+              align="center"
+              label="序号"
+            />
+            <el-table-column :label="$t('table.ref_no')" prop="ref_no" align="center" />
+            <el-table-column label="出库单号" prop="order_no" align="center" />
+            <el-table-column label="订单日期" align="center" prop="issue_date" sortable>
+              <template slot-scope="{row}">
+                <span>{{ row.issue_date | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="状态" align="center" prop="issue_status">
+              <template slot-scope="{row}">
+                <el-tag :type="row.issue_status | statusFilter">
+                  {{ row.issue_status }}
+                </el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column label="订单数量" align="center" prop="order_qty" sortable />
+            <el-table-column :label="$t('table.actions')" align="center" width="160" class-name="small-padding fixed-width">
+              <template slot-scope="{row}">
+                <router-link :to="{ name:'OutBoundCreateOrUpdate', params: createOrUpdateData }">
+                  <el-button v-if="row.issue_status == 'NEW' " type="primary" size="mini" @click="handleUpdate(row)">
+                    {{ $t('table.edit') }}
+                  </el-button>
+                </router-link>
+                <el-button v-if="row.issue_status=='SHIPPED'" size="mini" type="danger" @click="handleDelete(row)">
+                  {{ $t('table.delete') }}
                 </el-button>
-              </router-link>
-              <el-button v-if="row.issue_status=='SHIPPED'" size="mini" type="danger" @click="handleDelete(row)">
-                {{ $t('table.delete') }}
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-col>
-    </el-row>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-col>
+      </el-row>
+    </el-card>
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.page_limit" @pagination="getList" />
   </div>
