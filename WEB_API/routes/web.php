@@ -75,5 +75,13 @@ $router->group(['prefix' => 'v1'], function ($router) {
 
         // 库存余额
         $router->get('inventory','InventoryController@list');
+
+        /**
+         * 发票相关路由
+         */
+        // 列表
+        $router->get('invoice','InvoiceController@index');
+        // 更改状态
+        $router->put('invoice','InvoiceController@queryChangeStatus');
     });
 });
